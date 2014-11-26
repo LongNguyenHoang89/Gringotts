@@ -8,6 +8,9 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -23,12 +26,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NotificationActivity"
-            android:label="@string/title_activity_notification" >
-        </activity>
-        <activity
             android:name=".EventList"
             android:label="@string/title_activity_event_list" >
+        </activity>
+        <activity
+            android:name=".EventInfo"
+            android:label="@string/title_activity_event_info" >
+        </activity>
+        <activity
+            android:name=".NotificationActivity"
+            android:label="@string/title_activity_notification" >
         </activity>
     </application>
 
