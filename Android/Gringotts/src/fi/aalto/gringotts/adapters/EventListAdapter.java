@@ -4,8 +4,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import com.example.android.displayingbitmaps.util.ImageFetcher;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import fi.aalto.displayingbitmaps.util.ImageFetcher;
 import fi.aalto.gringotts.R;
 import fi.aalto.gringotts.entities.*;
 
