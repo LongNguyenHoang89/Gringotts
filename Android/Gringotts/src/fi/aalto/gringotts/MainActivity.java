@@ -1,16 +1,30 @@
 package fi.aalto.gringotts;
 
+import java.util.ArrayList;
+import java.util.Date;
+
+import fi.aalto.gringotts.adapter.TransactionListAdapter;
+import fi.aalto.gringotts.entity.Notification;
+import fi.aalto.gringotts.entity.NotificationType;
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.method.DateTimeKeyListener;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AbsListView;
+import android.widget.ListView;
 
 public class MainActivity extends Activity {
+
+	private AbsListView mRecentTransactionList;
+	private ArrayList<Notification> mDataSource;
+	private TransactionListAdapter mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		initUi();
 	}
 
 	@Override
@@ -30,5 +44,18 @@ public class MainActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void initUi() {
+		mDataSource = new ArrayList<Notification>();
+		mAdapter = new TransactionListAdapter(this, mDataSource);
+		mRecentTransactionList = (ListView) findViewById(R.id.listView1);
+
+		mRecentTransactionList.setAdapter(mAdapter);
+
+		mDataSource.add(new Notification("You paid Thanh for meal", new Date(), -100, NotificationType.PAYMENT));
+		mDataSource.add(new Notification("Thanh paid you for being awesome", new Date(), 200, NotificationType.PAYMENT));
+		mDataSource.add(new Notification("valar morghulis", new Date(), -500, NotificationType.PAYMENT));
+		mAdapter.notifyDataSetChanged();
 	}
 }
