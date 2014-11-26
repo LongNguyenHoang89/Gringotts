@@ -26,6 +26,10 @@
             android:name=".NotificationActivity"
             android:label="@string/title_activity_notification" >
         </activity>
+        <activity
+            android:name=".EventList"
+            android:label="@string/title_activity_event_list" >
+        </activity>
     </application>
 
 </manifest>

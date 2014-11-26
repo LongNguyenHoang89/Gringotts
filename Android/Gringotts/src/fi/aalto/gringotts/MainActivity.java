@@ -3,9 +3,9 @@ package fi.aalto.gringotts;
 import java.util.ArrayList;
 import java.util.Date;
 
-import fi.aalto.gringotts.adapter.TransactionListAdapter;
-import fi.aalto.gringotts.entity.Notification;
-import fi.aalto.gringotts.entity.NotificationType;
+import fi.aalto.gringotts.adapters.TransactionListAdapter;
+import fi.aalto.gringotts.entities.Notification;
+import fi.aalto.gringotts.entities.NotificationType;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.method.DateTimeKeyListener;

@@ -1,9 +1,9 @@
-package fi.aalto.gringotts.adapter;
+package fi.aalto.gringotts.adapters;
 
 import java.util.ArrayList;
 
 import fi.aalto.gringotts.R;
-import fi.aalto.gringotts.entity.Notification;
+import fi.aalto.gringotts.entities.Notification;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;

@@ -1,4 +1,4 @@
-package fi.aalto.gringotts.entity;
+package fi.aalto.gringotts.entities;
 
 import java.util.Date;
 
