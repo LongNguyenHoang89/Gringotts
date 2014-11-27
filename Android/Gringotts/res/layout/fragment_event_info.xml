@@ -179,7 +179,6 @@
             android:text="invited"
             android:textColor="@color/gray" />
     </RelativeLayout>
-    
-    <
+   
 
 </RelativeLayout>
