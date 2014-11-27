@@ -11,6 +11,8 @@
     <item name="darkorange" type="color">#FFFF8800</item>
     <item name="darkred" type="color">#FFCC0000</item>
     <item name="white" type="color">#FFFFFF</item>
+    <item name="black" type="color">#000000</item>
+    <item name="gray" type="color">#636363</item>
     
     <item name="btnStroke" type="color">#546e7a</item>
     <item name="btnFill" type="color">#15a8c2</item>
