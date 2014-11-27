@@ -22,7 +22,7 @@ public class CommonListAdapter extends ArrayAdapter<CommonItem> {
 	private Context mContext;
 	private ArrayList<CommonItem> mDataSource;
 	private ImageFetcher mImageFetcher;
-	public static int THUMB_SIZE = 165;
+	public static int THUMB_SIZE = 167;
 
 	public CommonListAdapter(FragmentActivity context,
 			ArrayList<CommonItem> data) {

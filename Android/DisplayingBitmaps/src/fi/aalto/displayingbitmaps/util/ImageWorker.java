@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -392,7 +393,7 @@ public abstract class ImageWorker {
                             drawable
                     });
             // Set background to loading bitmap
-            // imageView.setBackgroundDrawable(new BitmapDrawable(mResources, mLoadingBitmap));
+            //imageView.setBackgroundDrawable(new BitmapDrawable(mResources, mLoadingBitmap));
 
             imageView.setImageDrawable(td);
             td.startTransition(FADE_IN_TIME);
