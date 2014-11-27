@@ -7,6 +7,7 @@ public class Notification {
 	public Date Time;
 	public int Ammount;
 	public NotificationType Type;
+	public String Url;
 
 	public Notification(String content, Date time, int ammount, NotificationType type) {
 		super();
@@ -14,6 +15,15 @@ public class Notification {
 		Time = time;
 		Ammount = ammount;
 		Type = type;
+	}
+	
+	public Notification(String content, Date time, int ammount, NotificationType type, String imageUrl) {
+		super();
+		Content = content;
+		Time = time;
+		Ammount = ammount;
+		Type = type;
+		Url = imageUrl;
 	}
 
 }

@@ -31,7 +31,6 @@ public class TransactionListAdapter extends ArrayAdapter<Notification> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder mViewHolder;
-		int num_items = 0;
 
 		Notification note = this.getItem(position);
 
@@ -57,17 +56,17 @@ public class TransactionListAdapter extends ArrayAdapter<Notification> {
 
 		return convertView;
 	}
-
+	
 	@Override
 	public Notification getItem(int pos) {
 		return mDataSource.get(pos);
 	}
 
-	private static class ViewHolder {
-		TextView topView;
-		TextView bottomView;
-		TextView dateview;
-		ImageView icon;
+	public static class ViewHolder {
+		public TextView topView;
+		public TextView bottomView;
+		public TextView dateview;
+		public ImageView icon;
 
 		ViewHolder(View view) {
 			topView = (TextView) view.findViewById(R.id.top_view);

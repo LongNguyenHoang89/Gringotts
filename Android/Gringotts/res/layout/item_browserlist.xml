@@ -9,13 +9,13 @@
 
     <ImageView
         android:id="@+id/row_image"
-        android:layout_width="@dimen/item_height"
-        android:layout_height="@dimen/item_height"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:cropToPadding="true"
         android:padding="5dp"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitStart" />
 
     <LinearLayout
         android:id="@+id/detail_content"
