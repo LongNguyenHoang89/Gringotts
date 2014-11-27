@@ -2,12 +2,15 @@ package fi.aalto.gringotts.adapters;
 
 import java.util.ArrayList;
 
+import fi.aalto.displayingbitmaps.util.ImageFetcher;
 import fi.aalto.gringotts.R;
-import fi.aalto.gringotts.entities.Notification;
+import fi.aalto.gringotts.entities.CommonItem;
+import fi.aalto.gringotts.utils.RoundedImageView;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,28 +18,33 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class TransactionListAdapter extends ArrayAdapter<Notification> {
+public class CommonListAdapter extends ArrayAdapter<CommonItem> {
 	private Context mContext;
-	private Resources mResources;
-	private ArrayList<Notification> mDataSource;
+	private ArrayList<CommonItem> mDataSource;
+	private ImageFetcher mImageFetcher;
+	public static int THUMB_SIZE = 165;
 
-	public TransactionListAdapter(final Context context, ArrayList<Notification> data) {
+	public CommonListAdapter(FragmentActivity context,
+			ArrayList<CommonItem> data) {
 		super(context, R.layout.item_browserlist, data);
 
 		this.mContext = context;
 		this.mDataSource = data;
-		this.mResources = context.getResources();
+
+		mImageFetcher = ImageFetcher.createImageFetcher(context, THUMB_SIZE);
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder mViewHolder;
 
-		Notification note = this.getItem(position);
+		CommonItem note = this.getItem(position);
 
 		if (convertView == null) {
-			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.item_browserlist, parent, false);
+			LayoutInflater inflater = (LayoutInflater) mContext
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.item_browserlist, parent,
+					false);
 			mViewHolder = new ViewHolder(convertView);
 			convertView.setTag(mViewHolder);
 		} else {
@@ -44,21 +52,35 @@ public class TransactionListAdapter extends ArrayAdapter<Notification> {
 		}
 
 		mViewHolder.topView.setText(note.Content);
-		mViewHolder.dateview.setText(note.Time.toString());
-		mViewHolder.icon.setVisibility(View.GONE);
+
+		if (note.Time != null) {
+			mViewHolder.dateview.setText(note.Time.toString());
+		} else {
+			mViewHolder.dateview.setVisibility(View.GONE);
+		}
+
+		if (!note.Url.isEmpty()) {
+			mViewHolder.icon.setVisibility(View.VISIBLE);
+			mImageFetcher.loadImage(note.Url, mViewHolder.icon);
+		} else {
+			mViewHolder.icon.setVisibility(View.GONE);
+		}
 
 		if (note.Ammount > 0) {
 			mViewHolder.bottomView.setTextColor(Color.GREEN);
-		} else {
+		} else if (note.Ammount < 0) {
 			mViewHolder.bottomView.setTextColor(Color.RED);
+		} else {
+			mViewHolder.bottomView.setVisibility(View.GONE);
 		}
+
 		mViewHolder.bottomView.setText(Integer.toString(note.Ammount));
 
 		return convertView;
 	}
-	
+
 	@Override
-	public Notification getItem(int pos) {
+	public CommonItem getItem(int pos) {
 		return mDataSource.get(pos);
 	}
 
@@ -66,13 +88,13 @@ public class TransactionListAdapter extends ArrayAdapter<Notification> {
 		public TextView topView;
 		public TextView bottomView;
 		public TextView dateview;
-		public ImageView icon;
+		public RoundedImageView icon;
 
 		ViewHolder(View view) {
 			topView = (TextView) view.findViewById(R.id.top_view);
 			bottomView = (TextView) view.findViewById(R.id.bottom_view);
 			dateview = (TextView) view.findViewById(R.id.dateview);
-			icon = (ImageView) view.findViewById(R.id.row_image);
+			icon = (RoundedImageView) view.findViewById(R.id.row_image);
 		}
 	}
 }

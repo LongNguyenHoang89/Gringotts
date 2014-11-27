@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Gringotts</string>
@@ -10,5 +11,6 @@
     <string name="imageview_description">Image Thumbnail</string>
     <string name="no_network_connection_toast">No network connection found</string>
     <string name="title_activity_event_info">EventInfo</string>
+    <string name="title_activity_friend_list">FriendListActivity</string>
 
 </resources>
