@@ -13,5 +13,6 @@
     <string name="title_activity_event_info">EventInfo</string>
     <string name="title_activity_friend_list">FriendListActivity</string>
     <string name="title_activity_contact_details">ContactDetailsActivity</string>
+    <string name="title_activity_payment">PaymentActivity</string>
 
 </resources>
