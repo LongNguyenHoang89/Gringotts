@@ -27,6 +27,10 @@ public class MainActivity extends FragmentActivity {
 	private CommonListAdapter mAdapter;
 	private Button notificationButton;
 	private Button friendButton;
+	private Button EventButton;
+	private Button PayButton;
+	private Button ChargeButton;
+	private Button SettingButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +65,20 @@ public class MainActivity extends FragmentActivity {
 
 		// Populate UI object from xml
 		mRecentTransactionList = (ListView) findViewById(R.id.listView1);
+		EventButton = (Button) findViewById(R.id.imageButton1);
 		notificationButton = (Button) findViewById(R.id.imageButton2);
 		friendButton = (Button) findViewById(R.id.imageButton3);
+		PayButton = (Button) findViewById(R.id.imageButton4);
+		ChargeButton = (Button) findViewById(R.id.imageButton5);
+		SettingButton = (Button) findViewById(R.id.imageButton6);
 
 		mRecentTransactionList.setAdapter(mAdapter);
 
+		EventButton.setOnClickListener(buttonClick);
 		notificationButton.setOnClickListener(buttonClick);
+		PayButton.setOnClickListener(buttonClick);
+		ChargeButton.setOnClickListener(buttonClick);
+		SettingButton.setOnClickListener(buttonClick);
 		friendButton.setOnClickListener(buttonClick);
 	}
 
@@ -78,16 +90,23 @@ public class MainActivity extends FragmentActivity {
 		public void onClick(View v) {
 			Intent ii = null;
 			switch (v.getId()) {
+			case R.id.imageButton1:
+				ii = new Intent(MainActivity.this, EventList.class);
+				break;
 			case R.id.imageButton2:
 				ii = new Intent(MainActivity.this, NotificationActivity.class);
 				break;
 			case R.id.imageButton3:
 				ii = new Intent(MainActivity.this, FriendListActivity.class);
 				break;
+			case R.id.imageButton4:
+				ii = new Intent(MainActivity.this, PaymentActivity.class);
+				break;
 			}
 
 			if (ii != null) {
 				startActivity(ii);
+				overridePendingTransition(R.drawable.pull_in_right, R.drawable.push_out_left);
 			}
 		}
 	};

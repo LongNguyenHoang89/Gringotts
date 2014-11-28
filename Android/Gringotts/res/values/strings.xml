@@ -14,5 +14,9 @@
     <string name="title_activity_friend_list">FriendListActivity</string>
     <string name="title_activity_contact_details">ContactDetailsActivity</string>
     <string name="title_activity_payment">PaymentActivity</string>
+    <string name="title_activity_charge">ChargeActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
 
 </resources>

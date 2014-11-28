@@ -94,12 +94,21 @@ public class FriendListActivity extends FragmentActivity {
 		OnItemClickListener itemClick = new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {				
-				Intent ii = new Intent(PlaceholderFragment.this.getActivity(), ContactDetailsActivity.class);
+					long arg3) {
+				Intent ii = new Intent(PlaceholderFragment.this.getActivity(),
+						ContactDetailsActivity.class);
 				PlaceholderFragment.this.startActivity(ii);
+				PlaceholderFragment.this.getActivity().overridePendingTransition(R.drawable.pull_in_right, R.drawable.push_out_left);
 			}
 
 		};
 
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(R.drawable.pull_in_left,
+				R.drawable.push_out_right);
 	}
 }

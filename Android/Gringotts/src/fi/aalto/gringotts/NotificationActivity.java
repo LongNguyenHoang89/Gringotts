@@ -31,9 +31,19 @@ public class NotificationActivity extends FragmentActivity {
 
 		mNotificationList.setAdapter(mAdapter);
 
-		mDataSource.add(new CommonItem("You paid Thanh for meal", new Date(), -100, NotificationType.PAYMENT, Constants.MOCKPICTURE));
-		mDataSource.add(new CommonItem("Thanh paid you for being awesome", new Date(), 200, NotificationType.PAYMENT, Constants.MOCKPICTURE));
-		mDataSource.add(new CommonItem("valar morghulis", new Date(), -500, NotificationType.PAYMENT, Constants.MOCKPICTURE));
+		mDataSource.add(new CommonItem("You paid Thanh for meal", new Date(),
+				-100, NotificationType.PAYMENT, Constants.MOCKPICTURE));
+		mDataSource.add(new CommonItem("Thanh paid you for being awesome",
+				new Date(), 200, NotificationType.PAYMENT,
+				Constants.MOCKPICTURE));
+		mDataSource.add(new CommonItem("valar morghulis", new Date(), -500,
+				NotificationType.PAYMENT, Constants.MOCKPICTURE));
 		mAdapter.notifyDataSetChanged();
-	}	
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
+	}
 }

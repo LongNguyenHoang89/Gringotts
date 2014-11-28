@@ -56,4 +56,10 @@ public class ContactDetailsActivity extends Activity {
 			return rootView;
 		}
 	}
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
+	}
 }

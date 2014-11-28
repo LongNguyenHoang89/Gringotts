@@ -75,4 +75,10 @@ public class EventList extends FragmentActivity implements ActionBar.TabListener
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
+	}
 }
