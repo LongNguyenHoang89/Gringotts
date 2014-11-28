@@ -69,7 +69,7 @@ public class PaymentActivity extends FragmentActivity {
 
 			mImageFetcher = ImageFetcher.createImageFetcher(
 					(FragmentActivity) this.getActivity(), THUMB_SIZE);
-			
+
 			initUi(rootView);
 			return rootView;
 		}
@@ -84,10 +84,11 @@ public class PaymentActivity extends FragmentActivity {
 			mImageFetcher.loadImage(Constants.MOCKPICTURE, targetImage);
 		}
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
+		overridePendingTransition(R.drawable.pull_in_left,
+				R.drawable.push_out_right);
 	}
 }

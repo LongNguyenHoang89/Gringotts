@@ -102,6 +102,9 @@ public class MainActivity extends FragmentActivity {
 			case R.id.imageButton4:
 				ii = new Intent(MainActivity.this, PaymentActivity.class);
 				break;
+			case R.id.imageButton5:
+				ii = new Intent(MainActivity.this, ChargeActivity.class);
+				break;
 			}
 
 			if (ii != null) {
