@@ -106,7 +106,10 @@ public class MainActivity extends FragmentActivity {
 
 			if (ii != null) {
 				startActivity(ii);
-				overridePendingTransition(R.drawable.pull_in_right, R.drawable.push_out_left);
+
+				// http://madcoda.com/2013/09/android-activity-transition-slide-in-out-animation/
+				overridePendingTransition(R.drawable.pull_in_right,
+						R.drawable.push_out_left);
 			}
 		}
 	};
