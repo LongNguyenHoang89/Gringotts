@@ -10,7 +10,7 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 
-public class EventList extends FragmentActivity implements ActionBar.TabListener{
+public class EventList extends CommonActivity implements ActionBar.TabListener{
 	
 	private ViewPager viewPager;
     private EventTabsPagerAdapter mAdapter;
@@ -23,6 +23,7 @@ public class EventList extends FragmentActivity implements ActionBar.TabListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_list);
 		
+		setTitle("Events");
 		 // Initilization
         viewPager = (ViewPager) findViewById(R.id.event_pager);
         actionBar = getActionBar();

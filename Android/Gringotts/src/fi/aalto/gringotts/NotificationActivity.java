@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-public class NotificationActivity extends FragmentActivity {
+public class NotificationActivity extends CommonActivity {
 
 	private AbsListView mNotificationList;
 	private ArrayList<CommonItem> mDataSource;
@@ -20,6 +20,7 @@ public class NotificationActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle("Notifications");
 		setContentView(R.layout.activity_notification);
 		initUi();
 	}

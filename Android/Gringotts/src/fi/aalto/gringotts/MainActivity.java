@@ -22,7 +22,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends CommonActivity {
 
 	private AbsListView mRecentTransactionList;
 	private ArrayList<CommonItem> mDataSource;
@@ -37,17 +37,11 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		populateActionbar();
 		setContentView(R.layout.activity_main);
 		initUi();
+		setTitle("Popcoin");
+		hideActionBarIcon();
 		fakeData();
-	}
-
-	private void populateActionbar() {
-		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-		getActionBar().setCustomView(R.layout.custom_action_bar);
-		TextView label = (TextView) findViewById(R.id.screen_title);
-		label.setText("PopCoin");
 	}
 
 	@Override

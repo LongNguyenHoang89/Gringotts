@@ -9,11 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ContactDetailsActivity extends Activity {
+public class ContactDetailsActivity extends CommonActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle("Long Nguyen");
 		setContentView(R.layout.activity_contact_details);
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
