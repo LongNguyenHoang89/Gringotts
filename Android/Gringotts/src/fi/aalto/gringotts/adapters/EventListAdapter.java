@@ -20,7 +20,7 @@ import fi.aalto.gringotts.entities.*;
 
 public class EventListAdapter extends ArrayAdapter<Event> {
 	public static int RESOURCE_ID = R.layout.list_event_row;
-	public static int THUMB_SIZE = 90;
+	public static int THUMB_SIZE = 200;
 	
 	private List<Event> mEvents;
 	private LayoutInflater mInflater;
@@ -46,6 +46,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 		
 		ImageView iconView = (ImageView) convertView.findViewById(R.id.event_icon);
 		mImageFetcher.loadImage(mEvents.get(position).url, iconView);
+		
 		 
 		return convertView;
 	}

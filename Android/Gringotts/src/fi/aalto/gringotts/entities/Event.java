@@ -1,8 +1,10 @@
 package fi.aalto.gringotts.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Event {
+@SuppressWarnings("serial")
+public class Event implements Serializable{
 	public String name;
 	public String url;
 	public boolean isHost;
