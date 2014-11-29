@@ -68,6 +68,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:drawableTop="@drawable/calendar"
+                    android:hint="Test hint"
                     android:text="Events" />
 
                 <Button

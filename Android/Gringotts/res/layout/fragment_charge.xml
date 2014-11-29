@@ -1,140 +1,177 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="fi.aalto.gringotts.ChargeActivity$PlaceholderFragment" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dip" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:text="Amount (€):"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/amount_input"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="Amount"
-            android:inputType="number"
-            android:padding="5dp"
-            android:textSize="15sp"
-            android:textStyle="bold"
+            android:layout_weight="0.6"
             android:background="@drawable/rounded_edit_text"
-             />
+            android:gravity="left"
+            android:inputType="numberDecimal"
+            android:paddingBottom="2dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="2dp" />
+    </TableRow>
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="3"
-            android:gravity="center"
-            android:rowCount="2" >
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:gravity="center"
+        android:rowCount="2" >
 
-            <TableRow>
+        <TableRow>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".4" >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4" >
 
-                    <fi.aalto.gringotts.utils.RoundedImageView
-                        android:id="@+id/userImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitCenter" />
-                </RelativeLayout>
+                <fi.aalto.gringotts.utils.RoundedImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_centerInParent="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".2"
+                android:gravity="center"
+                android:orientation="vertical" >
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".2"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:padding="5dp"
                     android:text=">>"
                     android:textSize="30sp"
                     android:textStyle="bold" />
+            </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".4" >
-
-                    <fi.aalto.gringotts.utils.RoundedImageView
-                        android:id="@+id/targetImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitCenter" />
-                </RelativeLayout>
-            </TableRow>
-
-            <TableRow
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal" >
+                android:layout_height="match_parent"
+                android:layout_weight=".4" >
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".4"
-                    android:gravity="center_horizontal"
-                    android:text="Long Nguyen"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                <Button
+                    android:id="@+id/plus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@null"
+                    android:drawableLeft="@drawable/plus_circle" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".2" />
+                <fi.aalto.gringotts.utils.RoundedImageView
+                    android:id="@+id/targetImage"
+                android:layout_width="90dp"
+                        android:layout_height="90dp"
+                    android:layout_centerInParent="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/plus_circle"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </TableRow>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".4"
-                    android:gravity="center_horizontal"
-                    android:text="Swapnil Udar"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-            </TableRow>
-        </TableLayout>
-
-        <TextView
-            android:id="@+id/message_label"
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="Dinner at Taffa"
-            android:textSize="15sp" />
+            android:gravity="center_horizontal" >
 
-        <EditText
-            android:id="@+id/message_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/textlines"
-            android:gravity="top|center_vertical"
-            android:hint="Your message for the payment" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:gravity="center_horizontal"
+                android:text="Long Nguyen"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".2" />
+
+            <TextView
+                android:id="@+id/target_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:gravity="center_horizontal"
+                android:text="Swapnil Udar"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </TableRow>
+    </TableLayout>
+
+    <EditText
+        android:id="@+id/message_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_edit_text"
+        android:gravity="top|center_vertical"
+        android:hint="Your message for the payment"
+        android:padding="10dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="slide to request"
+            android:textColor="@color/lightGray"
+            android:textSize="20dp" >
+        </TextView>
 
         <fi.aalto.gringotts.utils.SlideButton
             android:id="@+id/paymentButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"           
-            android:layout_marginRight="10dp"            
-            android:background="@color/lightGray"           
+            android:background="@android:color/transparent"
             android:clickable="false"
             android:max="100"
             android:progressDrawable="@android:color/transparent"
-            android:thumb="@drawable/arrowright" >
+            android:thumb="@drawable/arrow_circle_right" >
         </fi.aalto.gringotts.utils.SlideButton>
-    </LinearLayout>
+    </FrameLayout>
 
-</RelativeLayout>
+</LinearLayout>

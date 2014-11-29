@@ -190,8 +190,7 @@ public class MainActivity extends CommonActivity {
                             + "Push notifications will not be received.");
                 } else {
                 	String deviceId= task.getResult();
-                	// TODO: client should send deviceId to server		
-                			
+                	// TODO: client should send deviceId to server			
                     Log.i(CLASS_NAME,"Device is registered with Push Service" + "\n" + "Device Id : " + deviceId);
                 }
                 return null;
@@ -199,15 +198,12 @@ public class MainActivity extends CommonActivity {
         });
 		
 		notificationListener = new IBMPushNotificationListener() {
-
 			@Override
 			public void onReceive(final IBMSimplePushNotification message) {
 				fakeData();	
 				Log.i(CLASS_NAME, message.toString());
 			}
-
 		};
-		
 	}
 	
 	private void registerPushListener() {
