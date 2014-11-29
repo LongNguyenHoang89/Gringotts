@@ -1,18 +1,32 @@
 package fi.aalto.gringotts;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Properties;
+
+import bolts.Continuation;
+import bolts.Task;
+
+import com.ibm.mobile.services.core.IBMBluemix;
+import com.ibm.mobile.services.push.IBMPush;
+import com.ibm.mobile.services.push.IBMPushNotificationListener;
+import com.ibm.mobile.services.push.IBMSimplePushNotification;
 
 import fi.aalto.gringotts.adapters.CommonListAdapter;
 import fi.aalto.gringotts.entities.CommonItem;
 import fi.aalto.gringotts.entities.NotificationType;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.method.DateTimeKeyListener;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +47,17 @@ public class MainActivity extends CommonActivity {
 	private Button PayButton;
 	private Button ChargeButton;
 	private Button SettingButton;
+	
+	// start defining variables for Push
+	private IBMPush push = null;
+	private IBMPushNotificationListener notificationListener = null;
+	
+	private static final String CLASS_NAME = MainActivity.class.getSimpleName();
+	private static final String APP_ID = "applicationID";
+    private static final String APP_SECRET = "applicationSecret";
+    private static final String APP_ROUTE = "applicationRoute";
+    private static final String PROPS_FILE = "bluelist.properties";
+    // end defining variables for Push
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +67,16 @@ public class MainActivity extends CommonActivity {
 		setTitle("Popcoin");
 		hideActionBarIcon();
 		fakeData();
+		
+		// init push services
+		initPushService();
 	}
+	
+	@Override
+    protected void onResume() {
+        super.onResume();
+        registerPushListener();
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -126,4 +160,60 @@ public class MainActivity extends CommonActivity {
 		mDataSource.add(new CommonItem("valar morghulis", new Date(), -500, NotificationType.PAYMENT));
 		mAdapter.notifyDataSetChanged();
 	}
+	
+	private void initPushService() {
+		// Read from properties file.
+        Properties props = new java.util.Properties();
+        Context context = getApplicationContext();
+        try {
+            AssetManager assetManager = context.getAssets();
+            props.load(assetManager.open(PROPS_FILE));
+            Log.i(CLASS_NAME, "Found configuration file: " + PROPS_FILE);
+        } catch (FileNotFoundException e) {
+            Log.e(CLASS_NAME, "The bluelist.properties file was not found.", e);
+        } catch (IOException e) {
+            Log.e(CLASS_NAME, "The bluelist.properties file could not be read properly.", e);
+        }
+        Log.i(CLASS_NAME, "Application ID is: " + props.getProperty(APP_ID));
+
+        // Initialize the IBM core backend-as-a-service.
+        IBMBluemix.initialize(this, props.getProperty(APP_ID), props.getProperty(APP_SECRET), props.getProperty(APP_ROUTE));
+		
+		push = IBMPush.initializeService();
+		push.register("DemoDeviceFinal", "DemoApp").continueWith(new Continuation<String, Void>() {
+
+            @Override
+            public Void then(Task<String> task) throws Exception {
+
+                if (task.isFaulted()) {
+                    Log.i(CLASS_NAME,"Error registering with Push Service. " + task.getError().getMessage() + "\n"
+                            + "Push notifications will not be received.");
+                } else {
+                	String deviceId= task.getResult();
+                	// TODO: client should send deviceId to server		
+                			
+                    Log.i(CLASS_NAME,"Device is registered with Push Service" + "\n" + "Device Id : " + deviceId);
+                }
+                return null;
+            }
+        });
+		
+		notificationListener = new IBMPushNotificationListener() {
+
+			@Override
+			public void onReceive(final IBMSimplePushNotification message) {
+				fakeData();	
+				Log.i(CLASS_NAME, message.toString());
+			}
+
+		};
+		
+	}
+	
+	private void registerPushListener() {
+		if (push != null) {
+            push.listen(notificationListener);
+        }
+	}
+	
 }

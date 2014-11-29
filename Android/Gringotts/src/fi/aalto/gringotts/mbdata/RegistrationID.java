@@ -16,6 +16,7 @@ import com.ibm.mobile.services.data.IBMDataObjectSpecialization;
 @IBMDataObjectSpecialization("RegistrationID")
 public class RegistrationID extends IBMDataObject {
 	private static final String TAG = RegistrationID.class.getSimpleName();
+
 	// DB Columns
 	private static final String FB_ID = "FB_ID";
 	private static final String REG_ID = "REG_ID";

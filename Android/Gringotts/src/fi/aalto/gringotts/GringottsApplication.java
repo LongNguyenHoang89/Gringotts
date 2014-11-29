@@ -19,6 +19,7 @@ import com.ibm.mobile.services.data.IBMDataException;
 import com.ibm.mobile.services.data.IBMDataObject;
 import com.ibm.mobile.services.data.IBMQuery;
 
+import fi.aalto.gringotts.mbdata.Operations;
 import fi.aalto.gringotts.mbdata.RegistrationID;
 
 public class GringottsApplication extends Application {
@@ -77,7 +78,9 @@ public class GringottsApplication extends Application {
 		regId.setRegistrationId("REG_ID_" + uuid());
 		regId.setTimestamp();
 
-		// Use the IBMDataObject to create and persist the RegistrationID
+		Operations.insert(regId);
+
+		/*// Use the IBMDataObject to create and persist the RegistrationID
 		// object.
 		regId.save().continueWith(new Continuation<IBMDataObject, Void>() {
 
@@ -96,10 +99,10 @@ public class GringottsApplication extends Application {
 				}
 				return null;
 			}
-		});
+		});*/
 	}
 
-	private void getRegistrationIds() {
+	private void getRegistrationIds() {/*
 		try {
 			IBMQuery<RegistrationID> query = IBMQuery
 					.queryForClass(RegistrationID.class);
@@ -136,6 +139,8 @@ public class GringottsApplication extends Application {
 		} catch (IBMDataException error) {
 			Log.e(TAG, "Exception : " + error.getMessage());
 		}
+	*/
+		Operations.fetchRegistrationIds();	
 	}
 
 	private String uuid() {
