@@ -72,7 +72,7 @@ public class Account extends IBMDataObject {
 
 	@Override
 	public String toString() {
-		return new Date(getTimestamp()) + " | " + getFacebookId() + " | "
+		return "Account : " + new Date(getTimestamp()) + " | " + getFacebookId() + " | "
 				+ getIBAN() + " | " + getName() + " | " + getAddress() + " | "
 				+ getRemark();
 	}

@@ -48,7 +48,7 @@ public class RegistrationID extends IBMDataObject {
 
 	@Override
 	public String toString() {
-		return new Date(getTimestamp()) + " | " + getFacebookId() + " | "
+		return "Registration : " + new Date(getTimestamp()) + " | " + getFacebookId() + " | "
 				+ getRegistrationId();
 	}
 }
