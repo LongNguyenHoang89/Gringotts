@@ -1,0 +1,66 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TableLayout
+        android:id="@+id/ticket_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="Total cost (€):"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/total_cost_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:background="@drawable/rounded_edit_text"
+                android:gravity="left"
+                android:inputType="numberDecimal"
+                android:paddingBottom="2dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="2dp" />
+        </TableRow>
+    </TableLayout>
+
+    <EditText
+        android:id="@+id/group_charge_message"
+        style="@android:style/TextAppearance.Small"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_edit_text"
+        android:gravity="left"
+        android:hint="Message"
+        android:padding="10dp" />
+
+    <fi.aalto.gringotts.utils.RowLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </fi.aalto.gringotts.utils.RowLayout>
+
+    <Button
+        android:id="@+id/split_cost_btn"
+        style="@style/ButtonTheme"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="15dp" 
+        android:text="Split"/>
+
+</LinearLayout>

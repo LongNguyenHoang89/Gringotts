@@ -16,6 +16,8 @@
     <string name="title_activity_payment">New Payment</string>
     <string name="title_activity_charge">New Charge</string>
     <string name="title_section1">Single</string>
-    <string name="title_section2">Group</string>    
+    <string name="title_section2">Group</string>
+    <string name="title_activity_group_charge">GroupChargeActivity</string>
+    <string name="title_activity_ticket_sale_acitivity">TicketSaleAcitivity</string>
 
 </resources>
