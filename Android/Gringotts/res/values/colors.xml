@@ -13,7 +13,7 @@
     <item name="white" type="color">#FFFFFF</item>
     <item name="black" type="color">#000000</item>
     <item name="gray" type="color">#636363</item>
-    <item name="lightBlue" type="color">#33CCCC</item>
+    <item name="lightBlue" type="color">#15A8C2</item>
     <item name="lightGray" type="color">#EDEDED</item>    
     
     <item name="btnStroke" type="color">#546e7a</item>

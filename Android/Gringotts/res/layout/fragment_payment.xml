@@ -115,10 +115,15 @@
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:background="@drawable/textlines"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:padding="5dp"
+            android:background="@drawable/rounded_edit_text"
             android:gravity="top|center_vertical"
-            android:hint="Your message for the payment" />
+            android:hint="Your message for the payment"            
+             />
 
         <fi.aalto.gringotts.utils.SlideButton
             android:id="@+id/paymentButton"
@@ -127,7 +132,8 @@
             android:background="@color/lightGray"
             android:clickable="false"
             android:max="100"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:progressDrawable="@android:color/transparent"
             android:thumb="@drawable/arrowright" >
         </fi.aalto.gringotts.utils.SlideButton>
