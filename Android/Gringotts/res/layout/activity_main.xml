@@ -42,7 +42,7 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"                                           
+                        android:layout_height="wrap_content"
                         android:text="Nguyen Hoang Long" />
 
                     <TextView
@@ -67,55 +67,27 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:drawableTop="@drawable/calendar"
-                    android:hint="Test hint"
-                    android:text="Events" />
+                    android:drawableTop="@drawable/charge"
+                    android:textColor="@color/azure"
+                    android:text="Pay" />
 
                 <Button
                     android:id="@+id/imageButton2"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:drawableTop="@drawable/notification"
-                    android:text="Notification" />
+                    android:drawableTop="@drawable/pay"
+                    android:textColor="@color/darkpink"
+                    android:text="Request" />
 
                 <Button
                     android:id="@+id/imageButton3"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:drawableTop="@drawable/friends"
-                    android:text="Friends" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp" >
-
-                <Button
-                    android:id="@+id/imageButton4"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:drawableTop="@drawable/arrowup"
-                    android:text="Pay" />
-
-                <Button
-                    android:id="@+id/imageButton5"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:drawableTop="@drawable/arrowdown"
-                    android:text="Charge" />
-
-                <Button
-                    android:id="@+id/imageButton6"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:drawableTop="@drawable/gear"
-                    android:text="Settings" />
+                    android:drawableTop="@drawable/events"
+                    android:textColor="@color/yellow"
+                    android:text="Events" />
             </TableRow>
         </TableLayout>
 

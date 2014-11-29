@@ -103,21 +103,16 @@ public class MainActivity extends CommonActivity {
 
 		// Populate UI object from xml
 		mRecentTransactionList = (ListView) findViewById(R.id.listView1);
-		EventButton = (Button) findViewById(R.id.imageButton1);
-		notificationButton = (Button) findViewById(R.id.imageButton2);
-		friendButton = (Button) findViewById(R.id.imageButton3);
-		PayButton = (Button) findViewById(R.id.imageButton4);
-		ChargeButton = (Button) findViewById(R.id.imageButton5);
-		SettingButton = (Button) findViewById(R.id.imageButton6);
+		PayButton = (Button) findViewById(R.id.imageButton1);
+		ChargeButton = (Button) findViewById(R.id.imageButton2);
+		EventButton = (Button) findViewById(R.id.imageButton3);		
 
 		mRecentTransactionList.setAdapter(mAdapter);
 
 		EventButton.setOnClickListener(buttonClick);
-		notificationButton.setOnClickListener(buttonClick);
+		//notificationButton.setOnClickListener(buttonClick);
 		PayButton.setOnClickListener(buttonClick);
-		ChargeButton.setOnClickListener(buttonClick);
-		SettingButton.setOnClickListener(buttonClick);
-		friendButton.setOnClickListener(buttonClick);
+		ChargeButton.setOnClickListener(buttonClick);		
 	}
 
 	/**
@@ -129,19 +124,13 @@ public class MainActivity extends CommonActivity {
 			Intent ii = null;
 			switch (v.getId()) {
 			case R.id.imageButton1:
-				ii = new Intent(MainActivity.this, EventList.class);
-				break;
-			case R.id.imageButton2:
-				ii = new Intent(MainActivity.this, NotificationActivity.class);
-				break;
-			case R.id.imageButton3:
-				ii = new Intent(MainActivity.this, FriendListActivity.class);
-				break;
-			case R.id.imageButton4:
 				ii = new Intent(MainActivity.this, PaymentActivity.class);
 				break;
-			case R.id.imageButton5:
+			case R.id.imageButton2:
 				ii = new Intent(MainActivity.this, ChargeActivity.class);
+				break;
+			case R.id.imageButton3:
+				ii = new Intent(MainActivity.this, EventList.class);
 				break;
 			}
 
