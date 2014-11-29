@@ -15,6 +15,7 @@ import com.ibm.mobile.services.data.IBMData;
 
 import fi.aalto.gringotts.mbdata.Charge;
 import fi.aalto.gringotts.mbdata.Event;
+import fi.aalto.gringotts.mbdata.OnCompletion;
 import fi.aalto.gringotts.mbdata.Operations;
 import fi.aalto.gringotts.mbdata.PaymentStatus;
 import fi.aalto.gringotts.mbdata.RegistrationID;
@@ -110,10 +111,10 @@ public class GringottsApplication extends Application {
 	}
 
 	private void fetchAll() {
-		Operations.fetchRegistrations();
+		Operations.fetchRegistrations(new OnCompletion());
 		// Operations.fetchAccounts();
-		Operations.fetchEvents();
-		Operations.fetchCharges();
+		Operations.fetchEvents(new OnCompletion());
+		Operations.fetchCharges(new OnCompletion());
 	}
 
 	private String uuid() {
