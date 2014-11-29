@@ -13,15 +13,19 @@ import com.ibm.mobile.services.data.IBMQuery;
 public class Operations {
 	private static final String TAG = Operations.class.getSimpleName();
 
-	public static void insertRegistrationId(RegistrationID regId) {
-		insert(regId);
+	public static void insert(RegistrationID regId) {
+		insert2DB(regId);
+	}
+	
+	public static void delete(RegistrationID regId) {
+		deleteFromDB(regId);
 	}
 
 	public static void fetchRegistrationIds() {
 		search(RegistrationID.class);
 	}
 
-	private static void insert(final IBMDataObject entity) {
+	private static void insert2DB(final IBMDataObject entity) {
 		// Use the IBMDataObject to create and persist the object
 		entity.save().continueWith(new Continuation<IBMDataObject, Void>() {
 
@@ -78,7 +82,7 @@ public class Operations {
 		}
 	}
 
-	public void delete(final IBMDataObject entity) {
+	private static void deleteFromDB(final IBMDataObject entity) {
 		// This will attempt to delete the item on the server.
 		entity.delete().continueWith(new Continuation<IBMDataObject, Void>() {
 			@Override
