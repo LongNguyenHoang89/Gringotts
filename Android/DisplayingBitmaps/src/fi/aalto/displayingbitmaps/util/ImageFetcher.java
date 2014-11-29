@@ -308,7 +308,6 @@ public class ImageFetcher extends ImageResizer {
     	 
     	ImageFetcher fetcher = new ImageFetcher(context, thumbSize);
     	fetcher.setLoadingImage(R.drawable.empty_photo);
-    	fetcher.setImageSize(thumbSize);
     	fetcher.addImageCache(context.getSupportFragmentManager(), cacheParams);
     	
     	return fetcher;

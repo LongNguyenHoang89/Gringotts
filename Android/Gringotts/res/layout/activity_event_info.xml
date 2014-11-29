@@ -1,7 +1,251 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fi.aalto.gringotts.EventInfo"
-    tools:ignore="MergeRootFrame" />
+    android:paddingTop="25dp"
+    tools:context="fi.aalto.gringotts.EventInfo$PlaceholderFragment" >
+
+    <LinearLayout
+        android:id="@+id/event_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/event_date"
+          	style="@style/CommonTextSmallBlack"
+            android:layout_marginBottom="5dp"
+            android:text="Date: 10 November 2014" />
+
+        <TextView
+            android:id="@+id/event_location"
+            style="@style/CommonTextSmallBlack"
+            android:layout_marginBottom="5dp"
+            android:text="Location: Otaniemi" />
+
+        <TextView
+            android:id="@+id/event_sold_ticket"
+            style="@style/CommonTextSmallBlack"
+            android:layout_marginBottom="5dp"
+            android:text="Number of sold ticket: 80"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/event_total_ticket"
+            style="@style/CommonTextSmallBlack"
+            android:text="Total number of tickets: 200"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/event_ticket_price"
+            style="@style/CommonTextSmallBlack"
+            android:text="Price: €10"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/sellBuyTicketBtn"
+        style="@style/ButtonTheme"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="25dp"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/event_friend_icon_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_info"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:weightSum="1" >
+
+        <ImageView
+            android:id="@+id/event_friend_icon1"
+            style="@style/GuestIcon"/>
+        
+        <ImageView
+            android:id="@+id/event_friend_icon2"
+            style="@style/GuestIcon"/>
+        <ImageView
+            android:id="@+id/event_friend_icon3"
+            style="@style/GuestIcon"/>
+        <ImageView
+            android:id="@+id/event_friend_icon4"
+            style="@style/GuestIcon"/>
+
+        <ImageView
+            android:id="@+id/event_friend_icon5"
+           	style="@style/GuestIcon" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/event_friend_text"
+        style="@android:style/TextAppearance.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_friend_icon_list"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="5dp"
+        android:text="Long, Kevin and 5 others are going"
+        android:textColor="@color/black" />
+
+  
+    <RelativeLayout
+        android:id="@+id/guest_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_friend_text"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp" >
+
+        <TextView
+            android:id="@+id/guests_title"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="left"
+            android:text="Guests"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/gray"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/going_value"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/guests_title"
+            android:text="150"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/going_text"
+            style="@android:style/TextAppearance.Small"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/going_value"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:text="going"
+            android:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/maybe_value"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/guests_title"
+            android:text="45"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/maybe_text"
+            style="@android:style/TextAppearance.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/maybe_value"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="maybe"
+            android:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/invited_value"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/guests_title"
+            android:text="300"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/invited_text"
+            style="@android:style/TextAppearance.Small"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/invited_value"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:text="invited"
+            android:textColor="@color/gray" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ticket_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/guest_info"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical" 
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+
+        <TextView
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Ticket"
+            android:textColor="@color/gray"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+        	android:layout_marginRight="25dp"
+            android:weightSum="1" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.65"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/ticket_name"
+                    style="@style/CommonTextSmallBlack"
+                    android:text="Name: Trinh Anh Khoa" />
+
+                <TextView
+                    style="@style/CommonTextSmallBlack"
+                    android:text="Seat: 03" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.35"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ticket_code" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

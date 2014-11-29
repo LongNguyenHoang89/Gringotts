@@ -22,5 +22,22 @@
         <item name="android:background">@drawable/button_bg</item>
         <item name="android:textStyle">bold</item>
     </style>
+    
+    <style name="CommonTextSmall" parent="@android:style/TextAppearance.Small">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+     <style name="CommonTextSmallBlack" parent="@style/CommonTextSmall">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    
+    <style name="GuestIcon">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:layout_weight">0.2</item>
+        <item name="android:scaleType">centerCrop</item>    
+    </style>
 
 </resources>
