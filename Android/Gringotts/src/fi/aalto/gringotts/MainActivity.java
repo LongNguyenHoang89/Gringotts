@@ -6,6 +6,7 @@ import java.util.Date;
 import fi.aalto.gringotts.adapters.CommonListAdapter;
 import fi.aalto.gringotts.entities.CommonItem;
 import fi.aalto.gringotts.entities.NotificationType;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
 
@@ -35,9 +37,17 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		populateActionbar();
 		setContentView(R.layout.activity_main);
 		initUi();
 		fakeData();
+	}
+
+	private void populateActionbar() {
+		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+		getActionBar().setCustomView(R.layout.custom_action_bar);
+		TextView label = (TextView) findViewById(R.id.screen_title);
+		label.setText("PopCoin");
 	}
 
 	@Override
@@ -111,19 +121,15 @@ public class MainActivity extends FragmentActivity {
 				startActivity(ii);
 
 				// http://madcoda.com/2013/09/android-activity-transition-slide-in-out-animation/
-				overridePendingTransition(R.drawable.pull_in_right,
-						R.drawable.push_out_left);
+				overridePendingTransition(R.drawable.pull_in_right, R.drawable.push_out_left);
 			}
 		}
 	};
 
 	private void fakeData() {
-		mDataSource.add(new CommonItem("You paid Thanh for meal", new Date(),
-				-100, NotificationType.PAYMENT));
-		mDataSource.add(new CommonItem("Thanh paid you for being awesome",
-				new Date(), 200, NotificationType.PAYMENT));
-		mDataSource.add(new CommonItem("valar morghulis", new Date(), -500,
-				NotificationType.PAYMENT));
+		mDataSource.add(new CommonItem("You paid Thanh for meal", new Date(), -100, NotificationType.PAYMENT));
+		mDataSource.add(new CommonItem("Thanh paid you for being awesome", new Date(), 200, NotificationType.PAYMENT));
+		mDataSource.add(new CommonItem("valar morghulis", new Date(), -500, NotificationType.PAYMENT));
 		mAdapter.notifyDataSetChanged();
 	}
 }
