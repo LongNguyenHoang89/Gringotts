@@ -53,7 +53,7 @@ public class Charge extends IBMDataObject {
 
 	@Override
 	public String toString() {
-		return getEventId() + " | " + getPaidByFBId() + " | " + getAmount()
-				+ " | " + getStatus().getDesc();
+		return "Charge : " + getEventId() + " | " + getPaidByFBId() + " | "
+				+ getAmount() + " | " + getStatus().getDesc();
 	}
 }

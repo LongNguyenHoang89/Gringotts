@@ -55,7 +55,7 @@ public class Event extends IBMDataObject {
 
 	@Override
 	public String toString() {
-		return new Date(getTimestamp()) + " | " + getId() + " | " + getDetail()
+		return "Event : " + new Date(getTimestamp()) + " | " + getId() + " | " + getDetail()
 				+ " | " + getOrganizerFBId();
 	}
 }
