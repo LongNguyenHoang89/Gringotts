@@ -27,10 +27,29 @@ var NordeaAPI = {
       var apiReq = https.request(options, function(response) {
         response.on('data', function(d) {
           data += d;
-          req.logger.info(data);
         });
         response.on('end', function() {
-          res.json(data);
+          var result = JSON.parse(data);
+          if (result.StatusCode === 0) {
+            // succes
+            // TODO: need dev_ids from database
+            var message = {
+                alert : "Push Notification from Javascript SDK",
+                url : "abc"
+            };
+            req.push.sendNotificationByDeviceIds(message, ['547a05c31fde007c802026f9','5479d0641fde007c801eeebc'])
+              .then(function(response) {
+                  // push success
+                  req.logger.info('push successfully');
+              },function(err) {
+                req.logger.info('push fail' + err);
+              });
+            res.json(data);
+          } else {
+            // fail
+            res.status(400).end();
+          }
+          
         });
         response.on('error', function(error) {
           process.stdout.write(error);
