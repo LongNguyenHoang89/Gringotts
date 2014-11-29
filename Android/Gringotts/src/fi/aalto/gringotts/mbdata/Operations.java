@@ -21,8 +21,32 @@ public class Operations {
 		deleteFromDB(regId);
 	}
 
-	public static void fetchRegistrationIds() {
+	public static void fetchRegistrations() {
 		search(RegistrationID.class);
+	}
+
+	public static void insert(Account account) {
+		insert2DB(account);
+	}
+
+	public static void fetchAccounts() {
+		search(Account.class);
+	}
+
+	public static void insert(Event event) {
+		insert2DB(event);
+	}
+
+	public static void fetchEvents() {
+		search(Event.class);
+	}
+	
+	public static void insert(Charge charge) {
+		insert2DB(charge);
+	}
+	
+	public static void fetchCharges() {
+		search(Charge.class);
 	}
 
 	private static void insert2DB(final IBMDataObject entity) {

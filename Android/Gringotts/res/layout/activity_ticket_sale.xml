@@ -32,10 +32,10 @@
                 android:background="@drawable/rounded_edit_text"
                 android:gravity="left"
                 android:inputType="numberDecimal"
-                android:paddingBottom="2dp"
+                android:paddingBottom="3dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:paddingTop="2dp"/>
+                android:paddingTop="3dp"/>
         </TableRow>
 
         <TableRow
@@ -57,11 +57,11 @@
                 android:layout_weight="0.6"
                 android:background="@drawable/rounded_edit_text"
                 android:gravity="left"
-                android:paddingBottom="2dp"
+                android:paddingBottom="3dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:inputType="number"
-                android:paddingTop="2dp"/>
+                android:paddingTop="3dp"/>
         </TableRow>
     </TableLayout>
 
@@ -95,6 +95,5 @@
         android:padding="10dp"
         style="@android:style/TextAppearance.Small"
         android:hint="Ticket description" />
-Ï
 
 </LinearLayout>

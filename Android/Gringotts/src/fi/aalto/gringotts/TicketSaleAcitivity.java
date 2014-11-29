@@ -6,6 +6,7 @@ import fi.aalto.gringotts.entities.Event;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ public class TicketSaleAcitivity extends CommonActivity {
 		Intent intent = getIntent();
 		
 		mEvent = (Event) intent.getSerializableExtra("eventInfo");
+		
 		
 		// Add text change listener to calculate revenue
 		mTicketPriceView = (EditText) findViewById(R.id.ticket_price_box);
@@ -58,7 +60,7 @@ public class TicketSaleAcitivity extends CommonActivity {
 	
 	private void setRevenue(double val) {
 		DecimalFormat df = new DecimalFormat("####0.00");
-		mRevenue.setText("Total revenue: Û" + df.format(val));
+		mRevenue.setText(getString(R.string.total_revenue_text) + df.format(val));
 	}
 	
 	TextWatcher revenueWatcher = new TextWatcher(){

@@ -10,34 +10,34 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 
-public class EventList extends CommonActivity implements ActionBar.TabListener{
-	
-	private ViewPager viewPager;
-    private EventTabsPagerAdapter mAdapter;
-    private ActionBar actionBar;
-    // Tab titles
-    private static final String[] TABS = {"All", "Hosting"};
+public class EventList extends CommonActivity implements ActionBar.TabListener {
+
+	private ViewPager mViewPager;
+	private EventTabsPagerAdapter mAdapter;
+	private ActionBar actionBar;
+	// Tab titles
+	private static final String[] TABS = { "All", "Hosting" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_list);
-		
+
 		setTitle("Events");
-		 // Initilization
-        viewPager = (ViewPager) findViewById(R.id.event_pager);
-        actionBar = getActionBar();
-        mAdapter = new EventTabsPagerAdapter(getSupportFragmentManager());
- 
-        viewPager.setAdapter(mAdapter);
-        actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
- 
-        // Adding Tabs
-        for (String tab_name : TABS) {
-            actionBar.addTab(actionBar.newTab().setText(tab_name)
-                    .setTabListener(this));
-        }
+		// Initilization
+		mViewPager = (ViewPager) findViewById(R.id.event_pager);
+		actionBar = getActionBar();
+		mAdapter = new EventTabsPagerAdapter(getFragmentManager());
+
+		mViewPager.setAdapter(mAdapter);
+		actionBar.setHomeButtonEnabled(false);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+		// Adding Tabs
+		for (String tab_name : TABS) {
+			actionBar.addTab(actionBar.newTab().setText(tab_name)
+					.setTabListener(this));
+		}
 	}
 
 	@Override
@@ -60,26 +60,23 @@ public class EventList extends CommonActivity implements ActionBar.TabListener{
 	}
 
 	@Override
-	public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
+		overridePendingTransition(R.drawable.pull_in_left,
+				R.drawable.push_out_right);
 	}
+
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		mViewPager.setCurrentItem(tab.getPosition());
+		mViewPager.getAdapter().notifyDataSetChanged();
+	}
+
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+
+	}
+
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+		// User selected the already selected tab. Usually do nothing.
+	}
+
 }

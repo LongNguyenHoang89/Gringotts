@@ -42,7 +42,7 @@ import java.net.URL;
  */
 public class ImageFetcher extends ImageResizer {
     private static final String TAG = "ImageFetcher";
-    private static final int HTTP_CACHE_SIZE = 10 * 1024 * 1024; // 10MB
+    private static final int HTTP_CACHE_SIZE = 30 * 1024 * 1024; // 10MB
     private static final String HTTP_CACHE_DIR = "http";
     private static final String IMAGE_CACHE_DIR = "thumbs";
     private static final int IO_BUFFER_SIZE = 8 * 1024;
@@ -304,7 +304,7 @@ public class ImageFetcher extends ImageResizer {
                  new ImageCache.ImageCacheParams(context, IMAGE_CACHE_DIR);
     	
     	// Set memory cache to 25% of app memory
-    	cacheParams.setMemCacheSizePercent(0.25f); 
+    	cacheParams.setMemCacheSizePercent(0.5f); 
     	 
     	ImageFetcher fetcher = new ImageFetcher(context, thumbSize);
     	fetcher.setLoadingImage(R.drawable.empty_photo);

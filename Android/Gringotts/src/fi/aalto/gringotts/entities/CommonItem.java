@@ -8,6 +8,7 @@ public class CommonItem {
 	public int Ammount = 0;
 	public NotificationType Type;
 	public String Url = "";
+	public String Id = "";
 
 	/**
 	 * Construct a feed

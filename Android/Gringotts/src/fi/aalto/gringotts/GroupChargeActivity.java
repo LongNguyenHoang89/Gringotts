@@ -1,41 +1,34 @@
 package fi.aalto.gringotts;
 
 import fi.aalto.gringotts.entities.Event;
-import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
+import fi.aalto.gringotts.fragments.GroupChargeFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 
 public class GroupChargeActivity extends CommonActivity {
-	public static final int TYPE_CHARGE = 1;
-	public static final int TYPE_DONATION = 2;
-	
 	private Event mEvent = null;
-	private int mType;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_group_charge);
 		
-		Intent i = getIntent();
-		mType = i.getExtras().getInt("type", 1);
-		mEvent = (Event) i.getSerializableExtra("eventInfo");
-		
-		// set title
-		setTitle(mEvent.name);
-		
-		// set type DONATION or CHARGE
-		if (mType == TYPE_DONATION) {
+		if (savedInstanceState == null) {
+			Intent i = getIntent();
+			mEvent = (Event) i.getSerializableExtra("eventInfo");
 			
+			// set title
+			setTitle(mEvent.name);
+			
+			GroupChargeFragment fragment = new GroupChargeFragment();
+			Bundle args = new Bundle();
+			args.putSerializable("eventInfo", mEvent);
+			fragment.setArguments(args);
+			getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).commit();
 		}
+		
 	}
 
 	@Override
@@ -56,4 +49,7 @@ public class GroupChargeActivity extends CommonActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+
+	
 }
