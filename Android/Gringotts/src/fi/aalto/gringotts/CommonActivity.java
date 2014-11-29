@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class CommonActivity extends FragmentActivity {
 	ImageButton backButton;
 	ImageButton homeButton;
+	protected FragmentActivity mActivity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,8 @@ public class CommonActivity extends FragmentActivity {
 		backButton.setOnClickListener(backClick);
 		homeButton = ((ImageButton) findViewById(R.id.home_button));
 		homeButton.setOnClickListener(homeClick);
+		
+		mActivity = this;
 	}
 
 	OnClickListener backClick = new OnClickListener() {
@@ -56,6 +59,18 @@ public class CommonActivity extends FragmentActivity {
 
 	protected void setTitle(String text) {
 		TextView label = (TextView) findViewById(R.id.screen_title);
-		label.setText("PopCoin");
+		label.setText(text);
+	}
+	
+	@Override
+	public void startActivity(Intent intent) {
+		super.startActivity(intent);
+		overridePendingTransition(R.drawable.pull_in_right, R.drawable.push_out_left);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
 	}
 }

@@ -115,7 +115,7 @@ public class MainActivity extends CommonActivity {
 				startActivity(ii);
 
 				// http://madcoda.com/2013/09/android-activity-transition-slide-in-out-animation/
-				overridePendingTransition(R.drawable.pull_in_right, R.drawable.push_out_left);
+				//overridePendingTransition(R.drawable.pull_in_right, R.drawable.push_out_left);
 			}
 		}
 	};
