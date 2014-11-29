@@ -11,7 +11,7 @@ var NordeaAPI = {
    createTransaction: function(req, res){
     var payload = req.body ? req.body: "",
         https = require('https');
-    req.logger.info(payload);
+    payload = JSON.stringify(payload);
     var options = {
         host: 'nordea-api.icds.ibmcloud.com',
         path: '/nordea/sb/transactions/transferMoney?client_id=245f9659-dbd1-4460-8ab9-e07a1127937c',
@@ -27,6 +27,7 @@ var NordeaAPI = {
       var apiReq = https.request(options, function(response) {
         response.on('data', function(d) {
           data += d;
+          req.logger.info(data);
         });
         response.on('end', function() {
           res.json(data);
