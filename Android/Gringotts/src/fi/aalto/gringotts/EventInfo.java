@@ -113,7 +113,6 @@ public class EventInfo extends CommonActivity {
         @Override
         public void onClick(View v) {
         	Intent i = new Intent(mActivity, GroupChargeActivity.class);
-        	i.putExtra("type", GroupChargeActivity.TYPE_CHARGE);
         	i.putExtra("eventInfo", mEvent);
         	startActivity(i);
         }
@@ -122,10 +121,10 @@ public class EventInfo extends CommonActivity {
 	View.OnClickListener requestDonationListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-        	Intent i = new Intent(mActivity, GroupChargeActivity.class);
-        	i.putExtra("type", GroupChargeActivity.TYPE_DONATION);
-        	i.putExtra("eventInfo", mEvent);
-        	startActivity(i);
+//        	Intent i = new Intent(mActivity, GroupChargeActivity.class);
+//        	i.putExtra("type", GroupChargeActivity.TYPE_DONATION);
+//        	i.putExtra("eventInfo", mEvent);
+//        	startActivity(i);
         }
 	};
 	

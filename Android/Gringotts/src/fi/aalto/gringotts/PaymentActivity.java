@@ -97,8 +97,7 @@ public class PaymentActivity extends CommonActivity {
 
 		@Override
 		public void onActivityResult(int requestCode, int resultCode, Intent data) {
-			Bundle selected = data.getExtras();
-			User target = selected.getParcelable("data");
+			User target = (User) data.getSerializableExtra("data");
 			setTarget(target);
 		}
 

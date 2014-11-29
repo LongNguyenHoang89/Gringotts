@@ -1,42 +1,25 @@
 package fi.aalto.gringotts.entities;
 
+import java.io.Serializable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class User implements Parcelable {
+public class User implements Serializable {
+	public String Id;
 	public String Name;
 	public String Image;
 
 	public User(CommonItem item) {
 		this.Name = item.Content;
 		this.Image = item.Url;
+		this.Id = item.Id;
 	}
-
-	protected User(Parcel in) {
-		Name = in.readString();
-		Image = in.readString();
+	
+	public User(String _id, String _name, String _url) {
+		this.Name = _name;
+		this.Image = _url;
+		this.Id = _id;
 	}
-
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(Name);
-		dest.writeString(Image);
-	}
-
-	public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
-		@Override
-		public User createFromParcel(Parcel in) {
-			return new User(in);
-		}
-
-		@Override
-		public User[] newArray(int size) {
-			return new User[size];
-		}
-	};
+	
 }

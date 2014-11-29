@@ -3,17 +3,22 @@ package fi.aalto.gringotts;
 import java.util.Locale;
 
 import fi.aalto.displayingbitmaps.util.ImageFetcher;
+import fi.aalto.gringotts.fragments.GroupChargeFragment;
 import fi.aalto.gringotts.utils.RoundedImageView;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
+//import android.app.Fragment;
+//import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.support.v13.app.FragmentPagerAdapter;
+//import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -47,7 +52,7 @@ public class ChargeActivity extends CommonActivity  implements
 		
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.container);
@@ -90,8 +95,8 @@ public class ChargeActivity extends CommonActivity  implements
 	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-		public SectionsPagerAdapter(FragmentManager fm) {
-			super(fm);
+		public SectionsPagerAdapter(FragmentManager fragmentManager) {
+			super(fragmentManager);
 		}
 
 		@Override
@@ -99,7 +104,15 @@ public class ChargeActivity extends CommonActivity  implements
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a PlaceholderFragment (defined as a static inner class
 			// below).
-			return PlaceholderFragment.newInstance(position + 1);
+			Log.d("GGEEEEEEET", "" + position);
+			switch (position) {
+			case 0:
+				return new PlaceholderFragment();
+			case 1:
+				return new GroupChargeFragment();
+			}
+			
+			return null;
 		}
 
 		@Override
@@ -170,6 +183,12 @@ public class ChargeActivity extends CommonActivity  implements
 
 			mImageFetcher.loadImage(Constants.MOCKPICTURE, userImage);
 			mImageFetcher.loadImage(Constants.MOCKPICTURE, targetImage);
+		}
+		
+		@Override
+		public void onDestroy() {
+			mImageFetcher.clearCache();
+			super.onDestroy();
 		}
 	}
 
