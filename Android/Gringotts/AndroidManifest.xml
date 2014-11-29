@@ -53,6 +53,11 @@
             android:name=".ChargeActivity"
             android:label="@string/title_activity_charge" >
         </activity>
+         <activity
+            android:name=".FriendListSelectionActivity"
+            android:theme="@android:style/Theme.Dialog"
+            android:label="@string/title_activity_friend_list" >
+        </activity>
     </application>
 
 </manifest>

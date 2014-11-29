@@ -5,6 +5,7 @@ import fi.aalto.gringotts.utils.RoundedImageView;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 import android.os.Build;
 import android.provider.Settings.Global;
@@ -26,7 +29,6 @@ public class PaymentActivity extends CommonActivity {
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment()).commit();
 		}
-
 	}
 
 	@Override
@@ -75,14 +77,17 @@ public class PaymentActivity extends CommonActivity {
 			userImage = (RoundedImageView) rootView.findViewById(R.id.userImage);
 			targetImage = (RoundedImageView) rootView.findViewById(R.id.targetImage);
 
+			((Button)rootView.findViewById(R.id.plus_button)).setOnClickListener(addContact);
 			mImageFetcher.loadImage(Constants.MOCKPICTURE, userImage);
-			mImageFetcher.loadImage(Constants.MOCKPICTURE, targetImage);
+			// mImageFetcher.loadImage(Constants.MOCKPICTURE, targetImage);
 		}
-	}
 
-	@Override
-	public void onBackPressed() {
-		super.onBackPressed();
-		overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
+		OnClickListener addContact = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(PlaceholderFragment.this.getActivity(), FriendListSelectionActivity.class);
+				PlaceholderFragment.this.startActivity(i);
+			}
+		};
 	}
 }
