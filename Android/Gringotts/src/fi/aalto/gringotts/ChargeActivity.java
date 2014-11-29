@@ -201,13 +201,13 @@ public class ChargeActivity extends CommonActivity  implements
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
+		mViewPager.setCurrentItem(tab.getPosition());
+	    mViewPager.getAdapter().notifyDataSetChanged(); 
 
 	}
 

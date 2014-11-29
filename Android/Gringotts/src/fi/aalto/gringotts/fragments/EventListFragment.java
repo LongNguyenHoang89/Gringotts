@@ -9,7 +9,8 @@ import fi.aalto.gringotts.adapters.EventListAdapter;
 import fi.aalto.gringotts.entities.Event;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,7 @@ public class EventListFragment extends Fragment {
 			mEventList.add(new Event("Dinner at Vapiano", "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRz9Vr8YFFDzTq8MTyjY5WVtbu40znBJytNk_YcmmlbSgJ4-MSnfxsJPFg"));
 		}
 
-		mEventAdapter = new EventListAdapter(this.getActivity(), mEventList);
+		mEventAdapter = new EventListAdapter((FragmentActivity) this.getActivity(), mEventList);
 		mEventListView.setAdapter(mEventAdapter);
 
 		return rootView;

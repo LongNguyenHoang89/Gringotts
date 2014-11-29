@@ -2,7 +2,6 @@ package fi.aalto.gringotts;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -10,15 +9,14 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
-import bolts.Continuation;
-import bolts.Task;
 
 import com.ibm.mobile.services.core.IBMBluemix;
 import com.ibm.mobile.services.data.IBMData;
-import com.ibm.mobile.services.data.IBMDataException;
-import com.ibm.mobile.services.data.IBMDataObject;
-import com.ibm.mobile.services.data.IBMQuery;
 
+import fi.aalto.gringotts.mbdata.Charge;
+import fi.aalto.gringotts.mbdata.Event;
+import fi.aalto.gringotts.mbdata.Operations;
+import fi.aalto.gringotts.mbdata.PaymentStatus;
 import fi.aalto.gringotts.mbdata.RegistrationID;
 
 public class GringottsApplication extends Application {
@@ -62,80 +60,60 @@ public class GringottsApplication extends Application {
 		// register the Registration ID
 		RegistrationID.registerSpecialization(RegistrationID.class);
 
-		Log.d(TAG, "Inserting registration ids");
-		insertRegistrationId();
-		insertRegistrationId();
-		insertRegistrationId();
+		Log.d(TAG, "Inserting dummy records");
+		initDB();
 
 		Log.d(TAG, "Reading registration ids");
-		getRegistrationIds();
+		fetchAll();
 	}
 
-	private void insertRegistrationId() {
-		final RegistrationID regId = new RegistrationID();
-		regId.setFacebookId("FB_" + uuid());
-		regId.setRegistrationId("REG_ID_" + uuid());
-		regId.setTimestamp();
+	private void initDB() {
+		final RegistrationID regId1 = new RegistrationID();
+		regId1.setFacebookId("FB_" + uuid());
+		regId1.setRegistrationId("REG_ID_" + uuid());
+		regId1.setTimestamp();
+		Operations.insert(regId1);
 
-		// Use the IBMDataObject to create and persist the RegistrationID
-		// object.
-		regId.save().continueWith(new Continuation<IBMDataObject, Void>() {
+		final RegistrationID regId2 = new RegistrationID();
+		regId2.setFacebookId("FB_" + uuid());
+		regId2.setRegistrationId("REG_ID_" + uuid());
+		regId2.setTimestamp();
+		Operations.insert(regId2);
 
-			@Override
-			public Void then(Task<IBMDataObject> task) throws Exception {
-				// Log if the save was cancelled.
-				if (task.isCancelled()) {
-					Log.e(TAG, "Exception : Task " + task.toString()
-							+ " was cancelled.");
-				} else if (task.isFaulted()) {
-					// Log error message, if the save task fails.
-					Log.e(TAG, "Exception : " + task.getError().getMessage());
-				} else {
-					// If the result succeeds, log the added entry.
-					Log.d(TAG, "Added entry : " + regId.toString());
-				}
-				return null;
-			}
-		});
+		final RegistrationID regId3 = new RegistrationID();
+		regId3.setFacebookId("FB_" + uuid());
+		regId3.setRegistrationId("REG_ID_" + uuid());
+		regId3.setTimestamp();
+		Operations.insert(regId3);
+
+		Event event = new Event();
+		event.setId("EVENT_" + uuid());
+		event.setDetail("Event details");
+		event.setOrganizerFBId(regId1.getFacebookId());
+		event.setTimestamp();
+		Operations.insert(event);
+
+		Charge charge1 = new Charge();
+		charge1.setEventId(event.getId());
+		charge1.setAmount(78.78f);
+		charge1.setPaidByFbId(regId2.getFacebookId());
+		charge1.setStatus(PaymentStatus.OPEN);
+		Operations.insert(charge1);
+
+		Charge charge2 = new Charge();
+		charge2.setEventId(event.getId());
+		charge2.setAmount(99.78f);
+		charge2.setPaidByFbId(regId3.getFacebookId());
+		charge2.setStatus(PaymentStatus.OPEN);
+		Operations.insert(charge2);
+
 	}
 
-	private void getRegistrationIds() {
-		try {
-			IBMQuery<RegistrationID> query = IBMQuery
-					.queryForClass(RegistrationID.class);
-			// Query all the registration ids from the server
-			query.find().continueWith(
-					new Continuation<List<RegistrationID>, Void>() {
-
-						@Override
-						public Void then(Task<List<RegistrationID>> task)
-								throws Exception {
-							final List<RegistrationID> objects = task.getResult();
-							// Log if the find was cancelled.
-							if (task.isCancelled()) {
-								Log.e(TAG,
-										"Exception : Task " + task.toString()
-												+ " was cancelled.");
-							} else if (task.isFaulted()) {
-								// Log error message, if the find task fails.
-								Log.e(TAG, "Exception : "
-										+ task.getError().getMessage());
-							} else {
-								// If the result succeeds, load the list.
-								for (IBMDataObject regId : objects) {
-									Log.d(TAG,
-											"Fetched registration ID "
-													+ ((RegistrationID) regId)
-															.toString());
-								}
-							}
-							return null;
-						}
-					}, Task.UI_THREAD_EXECUTOR);
-
-		} catch (IBMDataException error) {
-			Log.e(TAG, "Exception : " + error.getMessage());
-		}
+	private void fetchAll() {
+		Operations.fetchRegistrations();
+		// Operations.fetchAccounts();
+		Operations.fetchEvents();
+		Operations.fetchCharges();
 	}
 
 	private String uuid() {
