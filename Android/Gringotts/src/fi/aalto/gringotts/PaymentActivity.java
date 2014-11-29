@@ -16,15 +16,15 @@ import android.widget.TextView;
 import android.os.Build;
 import android.provider.Settings.Global;
 
-public class PaymentActivity extends FragmentActivity {
+public class PaymentActivity extends CommonActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_payment);
+		setTitle("New Payment");
 		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+			getFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment()).commit();
 		}
 
 	}
@@ -62,23 +62,18 @@ public class PaymentActivity extends FragmentActivity {
 		}
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_payment,
-					container, false);
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_payment, container, false);
 
-			mImageFetcher = ImageFetcher.createImageFetcher(
-					(FragmentActivity) this.getActivity(), THUMB_SIZE);
+			mImageFetcher = ImageFetcher.createImageFetcher((FragmentActivity) this.getActivity(), THUMB_SIZE);
 
 			initUi(rootView);
 			return rootView;
 		}
 
 		private void initUi(View rootView) {
-			userImage = (RoundedImageView) rootView
-					.findViewById(R.id.userImage);
-			targetImage = (RoundedImageView) rootView
-					.findViewById(R.id.targetImage);
+			userImage = (RoundedImageView) rootView.findViewById(R.id.userImage);
+			targetImage = (RoundedImageView) rootView.findViewById(R.id.targetImage);
 
 			mImageFetcher.loadImage(Constants.MOCKPICTURE, userImage);
 			mImageFetcher.loadImage(Constants.MOCKPICTURE, targetImage);
@@ -88,7 +83,6 @@ public class PaymentActivity extends FragmentActivity {
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		overridePendingTransition(R.drawable.pull_in_left,
-				R.drawable.push_out_right);
+		overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
 	}
 }

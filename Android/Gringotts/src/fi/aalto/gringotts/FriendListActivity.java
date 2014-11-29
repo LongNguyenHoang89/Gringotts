@@ -23,15 +23,15 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.os.Build;
 
-public class FriendListActivity extends FragmentActivity {
+public class FriendListActivity extends CommonActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle("Contacts");
 		setContentView(R.layout.activity_friend_list);
 		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+			getFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment()).commit();
 		}
 	}
 
@@ -64,51 +64,35 @@ public class FriendListActivity extends FragmentActivity {
 		private CommonListAdapter mAdapter;
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_common_list,
-					container, false);
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_common_list, container, false);
 			init(rootView);
 			return rootView;
 		}
 
 		private void init(View rootView) {
 			mDataSource = new ArrayList<CommonItem>();
-			mAdapter = new CommonListAdapter(
-					(FragmentActivity) this.getActivity(), mDataSource);
+			mAdapter = new CommonListAdapter((FragmentActivity) this.getActivity(), mDataSource);
 			mContactList = (ListView) rootView.findViewById(R.id.listView3);
 			mContactList.setAdapter(mAdapter);
 			mContactList.setOnItemClickListener(itemClick);
 
-			mDataSource
-					.add(new CommonItem("Long Nguyen", Constants.MOCKPICTURE));
+			mDataSource.add(new CommonItem("Long Nguyen", Constants.MOCKPICTURE));
 			mDataSource.add(new CommonItem("Thanh Bui", Constants.MOCKPICTURE));
-			mDataSource
-					.add(new CommonItem("Khoa Trinh", Constants.MOCKPICTURE));
+			mDataSource.add(new CommonItem("Khoa Trinh", Constants.MOCKPICTURE));
 			mDataSource.add(new CommonItem("Ha Nguyen", Constants.MOCKPICTURE));
-			mDataSource.add(new CommonItem("Swapnil Udar",
-					Constants.MOCKPICTURE));
+			mDataSource.add(new CommonItem("Swapnil Udar", Constants.MOCKPICTURE));
 			mAdapter.notifyDataSetChanged();
 		}
 
 		OnItemClickListener itemClick = new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				Intent ii = new Intent(PlaceholderFragment.this.getActivity(),
-						ContactDetailsActivity.class);
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				Intent ii = new Intent(PlaceholderFragment.this.getActivity(), ContactDetailsActivity.class);
 				PlaceholderFragment.this.startActivity(ii);
 				PlaceholderFragment.this.getActivity().overridePendingTransition(R.drawable.pull_in_right, R.drawable.push_out_left);
 			}
 
 		};
-
-	}
-
-	@Override
-	public void onBackPressed() {
-		super.onBackPressed();
-		overridePendingTransition(R.drawable.pull_in_left,
-				R.drawable.push_out_right);
 	}
 }

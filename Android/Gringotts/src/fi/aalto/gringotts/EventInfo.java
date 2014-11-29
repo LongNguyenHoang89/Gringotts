@@ -22,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.os.Build;
 
-public class EventInfo extends FragmentActivity {
+public class EventInfo extends CommonActivity {
 	private Event mEvent = null;
 	private ImageFetcher mImageFetcher;
 
@@ -31,7 +31,7 @@ public class EventInfo extends FragmentActivity {
 		Log.d("TAG", "Onc reate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_info);
-		
+		setTitle("Event Info");
 		
 		// create fake event
 		mEvent = new Event("Slush After Party", "");

@@ -22,7 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class ChargeActivity extends FragmentActivity implements
+public class ChargeActivity extends CommonActivity  implements
 		ActionBar.TabListener {
 
 	/**
@@ -43,7 +43,8 @@ public class ChargeActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_charge);
-
+		setTitle("New Charge");
+		
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
