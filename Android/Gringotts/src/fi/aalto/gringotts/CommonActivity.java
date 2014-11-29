@@ -14,6 +14,9 @@ import android.widget.TextView;
 public class CommonActivity extends FragmentActivity {
 	ImageButton backButton;
 	ImageButton homeButton;
+	ImageButton notificationButton;
+	TextView notificationNumber;
+	
 	protected FragmentActivity mActivity;
 
 	@Override
@@ -24,6 +27,7 @@ public class CommonActivity extends FragmentActivity {
 		backButton.setOnClickListener(backClick);
 		homeButton = ((ImageButton) findViewById(R.id.home_button));
 		homeButton.setOnClickListener(homeClick);
+		notificationButton = ((ImageButton) findViewById(R.id.notification_button));
 		
 		mActivity = this;
 	}

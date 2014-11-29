@@ -19,4 +19,11 @@
     
     <item name="btnStroke" type="color">#546e7a</item>
     <item name="btnFill" type="color">#15a8c2</item>
+    
+    <item name="yellow" type="color">#cf9d1c</item>
+    <item name="azure" type="color">#11e0d4</item>
+    <item name="darkpink" type="color">#cf1c3c</item>
+    
+    <item name="darkRed" type="color">#FF0000</item>
+    
 </resources>
