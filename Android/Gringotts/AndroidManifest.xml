@@ -11,7 +11,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <application
+    <!-- Permissions added for mobile data service -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application        
+        android:name=".GringottsApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -53,10 +61,10 @@
             android:name=".ChargeActivity"
             android:label="@string/title_activity_charge" >
         </activity>
-         <activity
+        <activity
             android:name=".FriendListSelectionActivity"
-            android:theme="@android:style/Theme.Dialog"
-            android:label="@string/title_activity_friend_list" >
+            android:label="@string/title_activity_friend_list"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
     </application>
 
