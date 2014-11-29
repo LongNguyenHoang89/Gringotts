@@ -12,5 +12,10 @@
     <string name="no_network_connection_toast">No network connection found</string>
     <string name="title_activity_event_info">EventInfo</string>
     <string name="title_activity_friend_list">FriendListActivity</string>
+    <string name="title_activity_contact_details">ContactDetailsActivity</string>
+    <string name="title_activity_payment">New Payment</string>
+    <string name="title_activity_charge">New Charge</string>
+    <string name="title_section1">Single</string>
+    <string name="title_section2">Group</string>    
 
 </resources>

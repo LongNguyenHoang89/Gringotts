@@ -9,6 +9,7 @@ import fi.aalto.gringotts.entities.NotificationType;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -17,7 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.os.Build;
 
 public class FriendListActivity extends FragmentActivity {
@@ -56,7 +59,7 @@ public class FriendListActivity extends FragmentActivity {
 	 */
 	public static class PlaceholderFragment extends Fragment {
 
-		private AbsListView mContactListList;
+		private AbsListView mContactList;
 		private ArrayList<CommonItem> mDataSource;
 		private CommonListAdapter mAdapter;
 
@@ -73,9 +76,9 @@ public class FriendListActivity extends FragmentActivity {
 			mDataSource = new ArrayList<CommonItem>();
 			mAdapter = new CommonListAdapter(
 					(FragmentActivity) this.getActivity(), mDataSource);
-			mContactListList = (ListView) rootView.findViewById(R.id.listView3);
-
-			mContactListList.setAdapter(mAdapter);
+			mContactList = (ListView) rootView.findViewById(R.id.listView3);
+			mContactList.setAdapter(mAdapter);
+			mContactList.setOnItemClickListener(itemClick);
 
 			mDataSource
 					.add(new CommonItem("Long Nguyen", Constants.MOCKPICTURE));
@@ -86,8 +89,26 @@ public class FriendListActivity extends FragmentActivity {
 			mDataSource.add(new CommonItem("Swapnil Udar",
 					Constants.MOCKPICTURE));
 			mAdapter.notifyDataSetChanged();
-
 		}
 
+		OnItemClickListener itemClick = new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent ii = new Intent(PlaceholderFragment.this.getActivity(),
+						ContactDetailsActivity.class);
+				PlaceholderFragment.this.startActivity(ii);
+				PlaceholderFragment.this.getActivity().overridePendingTransition(R.drawable.pull_in_right, R.drawable.push_out_left);
+			}
+
+		};
+
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(R.drawable.pull_in_left,
+				R.drawable.push_out_right);
 	}
 }

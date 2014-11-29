@@ -118,21 +118,10 @@ public class EventInfo extends FragmentActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-//	/**
-//	 * A placeholder fragment containing a simple view.
-//	 */
-//	public static class PlaceholderFragment extends Fragment {
-//
-//		public PlaceholderFragment() {
-//		}
-//
-//		@Override
-//		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//				Bundle savedInstanceState) {
-//			Log.d("TAG", "Onc reate view");
-//			mRootView = inflater.inflate(R.layout.fragment_event_info,
-//					container, false);
-//			return mRootView;
-//		}
-//	}
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
+	}
 }

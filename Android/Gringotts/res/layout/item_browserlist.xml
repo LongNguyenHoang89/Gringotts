@@ -4,21 +4,20 @@
     android:layout_height="@dimen/item_height"
     android:layout_alignParentBottom="true"
     android:layout_alignParentTop="true"
-    android:background="?android:attr/activatedBackgroundIndicator"
     android:layout_gravity="center_vertical"
-    android:layout_margin="10dp" 
-    >
+    android:layout_margin="10dp"
+    android:background="?android:attr/activatedBackgroundIndicator" >
 
     <fi.aalto.gringotts.utils.RoundedImageView
         android:id="@+id/row_image"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"        
         android:adjustViewBounds="true"
-        android:layout_marginLeft="20dp"                
-        android:layout_marginRight="20dp"   
-        android:layout_centerVertical="true"     
-        />
+        android:scaleType="fitCenter" />
 
     <LinearLayout
         android:id="@+id/detail_content"
@@ -27,7 +26,7 @@
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/bottom_view"
         android:layout_toRightOf="@id/row_image"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/top_view"
@@ -49,7 +48,7 @@
             android:ellipsize="end"
             android:paddingTop="1dp"
             android:singleLine="true"
-            android:textAllCaps="false"            
+            android:textAllCaps="false"
             android:textIsSelectable="false"
             android:textSize="10sp" />
     </LinearLayout>
@@ -62,11 +61,10 @@
         android:layout_centerVertical="true"
         android:ellipsize="end"
         android:gravity="right|center_vertical"
-        android:paddingRight="4dp"
         android:paddingLeft="4dp"
-        android:singleLine="true"       
+        android:paddingRight="4dp"
+        android:singleLine="true"
         android:textIsSelectable="false"
-        android:textSize="16sp"        
-        />
+        android:textSize="16sp" />
 
 </RelativeLayout>
