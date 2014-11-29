@@ -10,6 +10,11 @@ var express 	= require('express'),
 		applicationId : "d80dee38-dde5-49b6-8e38-c7ed2af2f1c2"
 	};
 
+// for parsing application/json
+app.use(bodyParser.json()); 
+// for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true })); 
+
 // init core sdk
 ibmbluemix.initialize(config);
 var logger = ibmbluemix.getLogger();
@@ -41,6 +46,8 @@ logger.info('mbaas context root: '+ibmconfig.getContextRoot());
 app.use(ibmconfig.getContextRoot(), require('./lib/accounts'));
 app.use(ibmconfig.getContextRoot(), require('./lib/staticfile'));
 app.use(ibmconfig.getContextRoot(), require('./lib/events'));
+app.use(ibmconfig.getContextRoot(), require('./lib/nordeaapi.js'));
+
 
 // Want to see how you can easily extend this template to work with third party node modules?
 // If so, add the Twilio service to your Mobile Cloud application and uncomment this next line.
