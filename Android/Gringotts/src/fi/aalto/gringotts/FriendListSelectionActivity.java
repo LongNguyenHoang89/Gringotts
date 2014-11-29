@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import fi.aalto.gringotts.adapters.CommonListAdapter;
+import fi.aalto.gringotts.adapters.CommonListAdapter.ViewHolder;
 import fi.aalto.gringotts.entities.CommonItem;
 import fi.aalto.gringotts.entities.NotificationType;
+import fi.aalto.gringotts.entities.User;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -69,7 +71,13 @@ public class FriendListSelectionActivity extends FragmentActivity {
 		OnItemClickListener itemClick = new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				
+				Intent resultIntent = new Intent();
+				ViewHolder t = (ViewHolder) arg1.getTag();
+				CommonItem item = (CommonItem) t.getTag();
+				User selected = new User(item);
+				resultIntent.putExtra("data", selected);
+				PlaceholderFragment.this.getActivity().setResult(0, resultIntent);
+				PlaceholderFragment.this.getActivity().finish();
 			}
 		};
 	}

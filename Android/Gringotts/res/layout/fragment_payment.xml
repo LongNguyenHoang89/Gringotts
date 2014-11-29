@@ -135,18 +135,32 @@
             android:hint="Your message for the payment"
             android:padding="5dp" />
 
-        <fi.aalto.gringotts.utils.SlideButton
-            android:id="@+id/paymentButton"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/lightGray"
-            android:clickable="false"
-            android:max="100"
-            android:progressDrawable="@android:color/transparent"
-            android:thumb="@drawable/arrowright" >
-        </fi.aalto.gringotts.utils.SlideButton>
+            android:background="@drawable/rectangle" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="slide to pay"
+                android:textSize="20dp"
+                android:textColor="@color/lightGray" 
+                >
+            </TextView>
+
+            <fi.aalto.gringotts.utils.SlideButton
+                android:id="@+id/paymentButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:max="100"
+                android:progressDrawable="@android:color/transparent"
+                android:thumb="@drawable/arrow_circle_right" >
+            </fi.aalto.gringotts.utils.SlideButton>
+        </FrameLayout>
     </LinearLayout>
 
 </RelativeLayout>
