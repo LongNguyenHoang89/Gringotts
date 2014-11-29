@@ -50,7 +50,8 @@ public class CommonListAdapter extends ArrayAdapter<CommonItem> {
 		} else {
 			mViewHolder = (ViewHolder) convertView.getTag();
 		}
-
+		
+		mViewHolder.setTag(note);
 		mViewHolder.topView.setText(note.Content);
 
 		if (note.Time != null) {
@@ -89,12 +90,21 @@ public class CommonListAdapter extends ArrayAdapter<CommonItem> {
 		public TextView bottomView;
 		public TextView dateview;
 		public RoundedImageView icon;
-
+		public Object tag;
+		
 		ViewHolder(View view) {
 			topView = (TextView) view.findViewById(R.id.top_view);
 			bottomView = (TextView) view.findViewById(R.id.bottom_view);
 			dateview = (TextView) view.findViewById(R.id.dateview);
 			icon = (RoundedImageView) view.findViewById(R.id.row_image);
+		}
+		
+		public Object getTag(){
+			return tag;
+		}
+		
+		public void setTag(Object t){
+			this.tag = t;
 		}
 	}
 }

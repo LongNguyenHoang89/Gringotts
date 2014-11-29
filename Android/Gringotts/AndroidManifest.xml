@@ -19,7 +19,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- Permissions added for mobile data service -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
+        android:name=".GringottsApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -29,6 +37,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,6 +55,7 @@
 
             <!-- Push Settings End -->
             
+
         </activity>
         <activity
             android:name=".EventList"
@@ -54,6 +64,11 @@
         <activity
             android:name=".EventInfo"
             android:label="@string/title_activity_event_info" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".NotificationActivity"
@@ -75,6 +90,7 @@
             android:name=".ChargeActivity"
             android:label="@string/title_activity_charge" >
         </activity>
+
         
          <!-- Push Settings Start -->
 
@@ -97,6 +113,21 @@
             </intent-filter>
         </receiver>
         <!-- Push Settings End -->
+
+        <activity
+            android:name=".GroupChargeActivity"
+            android:label="@string/title_activity_group_charge" >
+        </activity>
+        <activity
+            android:name=".TicketSaleAcitivity"
+            android:label="@string/title_activity_ticket_sale_acitivity" >
+        </activity>
+        <activity
+            android:name=".FriendListSelectionActivity"
+            android:label="@string/title_activity_friend_list"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+
     </application>
 
 </manifest>

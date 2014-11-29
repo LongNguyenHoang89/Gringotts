@@ -1,90 +1,183 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="25dp"
+    android:orientation="vertical"
+    android:paddingTop="15dp"
     tools:context="fi.aalto.gringotts.EventInfo$PlaceholderFragment" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/event_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_marginLeft="15dp"
         android:orientation="vertical" >
 
+        <Button
+            android:id="@+id/sellBuyTicketBtn"
+            style="@style/ButtonTheme"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="15dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/host_indication_text"
+            style="@style/CommonTextSmall"
+            android:text="You are the host"
+            android:textColor="@color/red"
+            android:textStyle="bold" 
+            android:layout_marginBottom="5dp"
+            android:visibility="gone"/>
+
         <TextView
             android:id="@+id/event_date"
-          	style="@style/CommonTextSmallBlack"
+            style="@style/CommonTextSmallBlack"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/host_indication_text"
             android:layout_marginBottom="5dp"
             android:text="Date: 10 November 2014" />
 
         <TextView
             android:id="@+id/event_location"
             style="@style/CommonTextSmallBlack"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/event_date"
             android:layout_marginBottom="5dp"
             android:text="Location: Otaniemi" />
 
         <TextView
-            android:id="@+id/event_sold_ticket"
-            style="@style/CommonTextSmallBlack"
-            android:layout_marginBottom="5dp"
-            android:text="Number of sold ticket: 80"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/event_total_ticket"
-            style="@style/CommonTextSmallBlack"
-            android:text="Total number of tickets: 200"
-            android:visibility="gone" />
-
-        <TextView
             android:id="@+id/event_ticket_price"
             style="@style/CommonTextSmallBlack"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/event_location"
             android:text="Price: €10"
             android:visibility="gone" />
-    </LinearLayout>
+        
+         <TextView
+            android:id="@+id/event_sold_ticket"
+            style="@style/CommonTextSmallBlack"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/event_ticket_price"
+            android:layout_marginBottom="5dp"
+            android:text="Number of sold tickets: 80"
+            android:visibility="gone" />
+        
+        
+    </RelativeLayout>
 
-    <Button
-        android:id="@+id/sellBuyTicketBtn"
-        style="@style/ButtonTheme"
-        android:layout_width="80dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="15dp"
-        android:visibility="gone"/>
+    <RelativeLayout
+        android:id="@+id/event_action_btns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="25dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/request_money_btn"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:src="@drawable/request" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Request \r\nmoney"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/request_donation_btn"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:src="@drawable/heart" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Request\r\ndonation"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/sell_ticket_btn"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:src="@drawable/ticket" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Sell\r\nticket"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/event_friend_icon_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/event_info"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
+        android:gravity="left"
         android:orientation="horizontal"
         android:weightSum="1" >
 
         <ImageView
             android:id="@+id/event_friend_icon1"
-            style="@style/GuestIcon"/>
-        
+            style="@style/GuestIcon" />
+
         <ImageView
             android:id="@+id/event_friend_icon2"
-            style="@style/GuestIcon"/>
+            style="@style/GuestIcon" />
+
         <ImageView
             android:id="@+id/event_friend_icon3"
-            style="@style/GuestIcon"/>
+            style="@style/GuestIcon" />
+
         <ImageView
             android:id="@+id/event_friend_icon4"
-            style="@style/GuestIcon"/>
+            style="@style/GuestIcon" />
 
         <ImageView
             android:id="@+id/event_friend_icon5"
-           	style="@style/GuestIcon" />
-
+            style="@style/GuestIcon" />
     </LinearLayout>
 
     <TextView
@@ -92,22 +185,19 @@
         style="@android:style/TextAppearance.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/event_friend_icon_list"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="5dp"
         android:text="Long, Kevin and 5 others are going"
         android:textColor="@color/black" />
 
-  
     <RelativeLayout
         android:id="@+id/guest_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/event_friend_text"
-        android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" >
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp" >
 
         <TextView
             android:id="@+id/guests_title"
@@ -115,20 +205,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_marginBottom="5dp"
             android:gravity="left"
             android:text="Guests"
-            android:layout_marginBottom="5dp"
             android:textColor="@color/gray"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/going_value"
-            style="@android:style/TextAppearance.Medium"
+            style="@android:style/TextAppearance.Small"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:gravity="center_horizontal"
             android:layout_below="@+id/guests_title"
+            android:gravity="center_horizontal"
             android:text="150"
             android:textColor="@color/black" />
 
@@ -146,11 +236,11 @@
 
         <TextView
             android:id="@+id/maybe_value"
-            style="@android:style/TextAppearance.Medium"
+            style="@android:style/TextAppearance.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@+id/guests_title"
+            android:layout_centerHorizontal="true"
             android:text="45"
             android:textColor="@color/black" />
 
@@ -167,12 +257,12 @@
 
         <TextView
             android:id="@+id/invited_value"
-            style="@android:style/TextAppearance.Medium"
+            style="@android:style/TextAppearance.Small"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:gravity="center_horizontal"
             android:layout_below="@+id/guests_title"
+            android:gravity="center_horizontal"
             android:text="300"
             android:textColor="@color/black" />
 
@@ -193,10 +283,9 @@
         android:id="@+id/ticket_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/guest_info"
         android:layout_marginTop="15dp"
-        android:orientation="vertical" 
-        android:visibility="gone">
+        android:orientation="vertical"
+        android:visibility="gone" >
 
         <ImageView
             android:layout_width="match_parent"
@@ -216,16 +305,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="25dp"
-        	android:layout_marginRight="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
             android:weightSum="1" >
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.65"
+                android:layout_weight="0.7"
                 android:orientation="vertical" >
 
                 <TextView
@@ -241,11 +330,11 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.35"
+                android:layout_weight="0.3"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/ticket_code" />
         </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

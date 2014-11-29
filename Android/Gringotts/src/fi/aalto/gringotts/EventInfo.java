@@ -7,7 +7,10 @@ import fi.aalto.gringotts.entities.Event;
 import fi.aalto.gringotts.entities.Ticket;
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -18,8 +21,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.os.Build;
 
 public class EventInfo extends CommonActivity {
@@ -28,7 +33,6 @@ public class EventInfo extends CommonActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.d("TAG", "Onc reate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_info);
 		setTitle("Event Info");
@@ -37,26 +41,46 @@ public class EventInfo extends CommonActivity {
 		mEvent = new Event("Slush After Party", "");
 		mEvent.date = "10 November 2014";
 		mEvent.location = "Otaniemi";
-		mEvent.isHost = false;
+		mEvent.isHost = true;
 		mEvent.sellingTicket = true;
 		mEvent.ticketPrice = 5;
-		mEvent.ownTicket = new Ticket();
+		mEvent.soldTicket = 130;
+		mEvent.totalTicket = 200;
+		mEvent.ownTicket = null;
 		
 		setTitle(mEvent.name);
 		
 		setGuestIcons(mEvent.guests);
 		
 		if (mEvent.sellingTicket) {
-			Button ticketBtn = (Button) findViewById(R.id.sellBuyTicketBtn);
-			ticketBtn.setVisibility(View.VISIBLE);
 			if (mEvent.isHost) {
-				ticketBtn.setText("Sell Ticket");
-				ticketBtn.setOnClickListener(sellTicketListener);
-			} else if (mEvent.ownTicket == null){
-				ticketBtn.setText("Buy Ticket");
-				ticketBtn.setOnClickListener(buyTicketListener);
+				View actionLayout = findViewById(R.id.event_action_btns);
+				actionLayout.setVisibility(View.VISIBLE);
+				View hostText = findViewById(R.id.host_indication_text);
+				hostText.setVisibility(View.VISIBLE);
+				if (mEvent.sellingTicket) {
+					TextView ticketPriceView = (TextView) findViewById(R.id.event_ticket_price);
+					ticketPriceView.setText("Price: Û" + mEvent.ticketPrice);
+					ticketPriceView.setVisibility(View.VISIBLE);
+					
+					TextView soldTicketView = (TextView) findViewById(R.id.event_sold_ticket);
+					soldTicketView.setText("Number of sold tickets: " + mEvent.soldTicket + "/" + mEvent.totalTicket);
+					soldTicketView.setVisibility(View.VISIBLE);
+					
+					ImageButton requestMoneyBtn = (ImageButton) findViewById(R.id.request_money_btn);
+					requestMoneyBtn.setOnClickListener(requestMoneyListener);
+					ImageButton requestDonationBtn = (ImageButton) findViewById(R.id.request_donation_btn);
+					requestDonationBtn.setOnClickListener(requestDonationListener);
+					ImageButton sellTicketBtn = (ImageButton) findViewById(R.id.sell_ticket_btn);
+					sellTicketBtn.setOnClickListener(sellTicketListener);
+				}
 			} else {
-				ticketBtn.setVisibility(View.GONE);
+				if(mEvent.ownTicket == null){
+					Button ticketBtn = (Button) findViewById(R.id.sellBuyTicketBtn);
+					ticketBtn.setText("Buy Ticket");
+					ticketBtn.setVisibility(View.VISIBLE);
+					ticketBtn.setOnClickListener(buyTicketListener);
+				}
 			}
 		}
 		
@@ -85,17 +109,52 @@ public class EventInfo extends CommonActivity {
 		ticketLayout.setVisibility(View.VISIBLE);
 	}
 	
+	View.OnClickListener requestMoneyListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        	Intent i = new Intent(mActivity, GroupChargeActivity.class);
+        	i.putExtra("type", GroupChargeActivity.TYPE_CHARGE);
+        	i.putExtra("eventInfo", mEvent);
+        	startActivity(i);
+        }
+	};
+	
+	View.OnClickListener requestDonationListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        	Intent i = new Intent(mActivity, GroupChargeActivity.class);
+        	i.putExtra("type", GroupChargeActivity.TYPE_DONATION);
+        	i.putExtra("eventInfo", mEvent);
+        	startActivity(i);
+        }
+	};
+	
 	View.OnClickListener sellTicketListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-
+        	Intent i = new Intent(mActivity, TicketSaleAcitivity.class);
+        	i.putExtra("eventInfo", mEvent);
+        	startActivity(i);
         }
 	};
 	
 	View.OnClickListener buyTicketListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-
+        	new AlertDialog.Builder(mActivity)
+            .setMessage("Are you sure you want to buy the ticket?")
+            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) { 
+                    // TODO: buy ticket
+                }
+             })
+            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) { 
+                    // do nothing
+                }
+             })
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .show();
         }
 	};
 
@@ -116,12 +175,5 @@ public class EventInfo extends CommonActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	
-	@Override
-	public void onBackPressed() {
-		super.onBackPressed();
-		overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
 	}
 }

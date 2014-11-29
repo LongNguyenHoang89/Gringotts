@@ -45,14 +45,13 @@ public class EventListFragment extends Fragment {
 			}
 		});
 
-		mEventList = new ArrayList<Event>();
-		mEventList.add(new Event("Slush After party", "http://mobilium.com/wp-content/uploads/2014/05/slush-logo-300px.jpg"));
-		mEventList.add(new Event("ESN trip to Lapland", "http://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png"));
+		mEventList = new ArrayList<Event>(); 
+		mEventList.add(new Event("Slush After party", "http://highway.slush.org/wp-content/themes/slush2014/assets/img/slush-logo-red-300px.png"));
+		mEventList.add(new Event("Nordea Innovation Challenge", "https://fbexternal-a.akamaihd.net/safe_image.php?d=AQAiq8trWsVKH9GL&w=484&h=253&url=http%3A%2F%2Fnordeainnovationchallenge.com%2Fwp-content%2Fuploads%2F2014%2F10%2Fnic_fb.png&cfs=1"));
 		if (mType == TYPE_ALL) {
 			mEventList.add(new Event("IBM Future Insight Afternoon", "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1507923_10152503479981045_6537254921336061611_n.png?oh=bf417715ef9ec2c75f5a8ac9909e8739&oe=55135BD6&__gda__=1426523745_523707cf9a0f2f81f67e4779565be37a"));
 			mEventList.add(new Event("Dinner at Vapiano", "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRz9Vr8YFFDzTq8MTyjY5WVtbu40znBJytNk_YcmmlbSgJ4-MSnfxsJPFg"));
 		}
-		
 
 		mEventAdapter = new EventListAdapter(this.getActivity(), mEventList);
 		mEventListView.setAdapter(mEventAdapter);

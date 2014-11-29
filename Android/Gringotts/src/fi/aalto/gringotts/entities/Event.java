@@ -10,6 +10,8 @@ public class Event implements Serializable{
 	public boolean isHost;
 	public boolean sellingTicket;
 	public double ticketPrice;
+	public int soldTicket;
+	public int totalTicket;
 	public Ticket ownTicket = null;
 	public String date;
 	public String location;
