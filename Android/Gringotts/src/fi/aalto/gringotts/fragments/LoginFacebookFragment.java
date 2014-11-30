@@ -7,6 +7,7 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
 
+import fi.aalto.gringotts.LoginNordeaActivity;
 import fi.aalto.gringotts.MainActivity;
 import fi.aalto.gringotts.R;
 import fi.aalto.gringotts.R.id;
@@ -101,9 +102,9 @@ public class LoginFacebookFragment extends Fragment {
 	    	Log.i(TAG, "Logged in...");
 	    	
 	    	if (!this.getActivity().isFinishing()) {
-		    	Intent i = new Intent(getActivity(), MainActivity.class);
+		    	Intent i = new Intent(getActivity(), LoginNordeaActivity.class);
 	//	    	i.putExtra("logedIn", true);
-	//	    	i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		    	i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		    	getActivity().startActivity(i);
 		    	getActivity().finish();
 	    	}
