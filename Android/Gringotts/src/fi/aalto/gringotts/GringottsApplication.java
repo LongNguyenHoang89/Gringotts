@@ -33,7 +33,8 @@ public class GringottsApplication extends Application {
 	
 	private final String USER_AGENT = "Mozilla/5.0";
 
-	private String sRoute = "10.100.28.219:3000";	
+	//private String sRoute = "10.100.28.219:3000";	
+	private String sRoute = null;
 
 	public GringottsApplication() {
 		// TODO Auto-generated constructor stub
@@ -78,7 +79,7 @@ public class GringottsApplication extends Application {
 		// fetchAll();
 
 		// Initialize route
-		// sRoute = props.getProperty(Constants.APP_ROUTE);
+		sRoute = props.getProperty(Constants.APP_ROUTE);
 		Log.d(TAG, "Route " + sRoute);
 	}
 
