@@ -37,56 +37,61 @@ public class EventInfo extends CommonActivity {
 		setContentView(R.layout.activity_event_info);
 		setTitle("Event Info");
 		
+		Intent i = getIntent();
+		mEvent = (Event) i.getSerializableExtra("eventInfo");
+		
 		// create fake event
-		mEvent = new Event("Slush After Party", "");
-		mEvent.date = "10 November 2014";
-		mEvent.location = "Otaniemi";
-		mEvent.isHost = true;
-		mEvent.sellingTicket = true;
-		mEvent.ticketPrice = 5;
-		mEvent.soldTicket = 130;
-		mEvent.totalTicket = 200;
-		mEvent.ownTicket = null;
+//		mEvent = new Event("Slush After Party", "");
+//		mEvent.date = "10 November 2014";
+//		mEvent.location = "Otaniemi";
+//		mEvent.isHost = true;
+//		mEvent.sellingTicket = true;
+//		mEvent.ticketPrice = 5;
+//		mEvent.soldTicket = 130;
+//		mEvent.totalTicket = 200;
+//		mEvent.ownTicket = null;
 		
 		setTitle(mEvent.name);
 		
+		Log.d("Is host", "" + mEvent.isHost);
+		
 		setGuestIcons(mEvent.guests);
 		
-		if (mEvent.sellingTicket) {
-			if (mEvent.isHost) {
+		if (mEvent.isHost) {
+			View hostText = findViewById(R.id.host_indication_text);
+			hostText.setVisibility(View.VISIBLE);
+			
+			if (mEvent.sellingTicket) {
+				TextView ticketPriceView = (TextView) findViewById(R.id.event_ticket_price);
+				ticketPriceView.setText("Price: Û" + mEvent.ticketPrice);
+				ticketPriceView.setVisibility(View.VISIBLE);
+				
+				TextView soldTicketView = (TextView) findViewById(R.id.event_sold_ticket);
+				soldTicketView.setText("Number of sold tickets: " + mEvent.soldTicket + "/" + mEvent.totalTicket);
+				soldTicketView.setVisibility(View.VISIBLE);
+				
+			} else {
 				View actionLayout = findViewById(R.id.event_action_btns);
 				actionLayout.setVisibility(View.VISIBLE);
-				View hostText = findViewById(R.id.host_indication_text);
-				hostText.setVisibility(View.VISIBLE);
-				if (mEvent.sellingTicket) {
-					TextView ticketPriceView = (TextView) findViewById(R.id.event_ticket_price);
-					ticketPriceView.setText("Price: Û" + mEvent.ticketPrice);
-					ticketPriceView.setVisibility(View.VISIBLE);
-					
-					TextView soldTicketView = (TextView) findViewById(R.id.event_sold_ticket);
-					soldTicketView.setText("Number of sold tickets: " + mEvent.soldTicket + "/" + mEvent.totalTicket);
-					soldTicketView.setVisibility(View.VISIBLE);
-					
-					ImageButton requestMoneyBtn = (ImageButton) findViewById(R.id.request_money_btn);
-					requestMoneyBtn.setOnClickListener(requestMoneyListener);
-					ImageButton requestDonationBtn = (ImageButton) findViewById(R.id.request_donation_btn);
-					requestDonationBtn.setOnClickListener(requestDonationListener);
-					ImageButton sellTicketBtn = (ImageButton) findViewById(R.id.sell_ticket_btn);
-					sellTicketBtn.setOnClickListener(sellTicketListener);
-				}
+				
+				ImageButton requestMoneyBtn = (ImageButton) findViewById(R.id.request_money_btn);
+				requestMoneyBtn.setOnClickListener(requestMoneyListener);
+				ImageButton requestDonationBtn = (ImageButton) findViewById(R.id.request_donation_btn);
+				requestDonationBtn.setOnClickListener(requestDonationListener);
+				ImageButton sellTicketBtn = (ImageButton) findViewById(R.id.sell_ticket_btn);
+				sellTicketBtn.setOnClickListener(sellTicketListener);
+			}
+		} else {
+			if(mEvent.ownTicket == null){
+				Button ticketBtn = (Button) findViewById(R.id.sellBuyTicketBtn);
+				ticketBtn.setText("Buy Ticket");
+				ticketBtn.setVisibility(View.VISIBLE);
+				ticketBtn.setOnClickListener(buyTicketListener);
 			} else {
-				if(mEvent.ownTicket == null){
-					Button ticketBtn = (Button) findViewById(R.id.sellBuyTicketBtn);
-					ticketBtn.setText("Buy Ticket");
-					ticketBtn.setVisibility(View.VISIBLE);
-					ticketBtn.setOnClickListener(buyTicketListener);
-				}
+				setTicketInfo(mEvent.ownTicket);
 			}
 		}
 		
-		if (mEvent.ownTicket != null) {
-			setTicketInfo(mEvent.ownTicket);
-		}
 	}
 	
 	private void setGuestIcons(List<String> guests) {

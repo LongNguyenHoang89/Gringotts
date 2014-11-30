@@ -16,37 +16,41 @@ public class Operations {
 	public static void insert(RegistrationID regId) {
 		insert2DB(regId);
 	}
-	
+
 	public static void delete(RegistrationID regId) {
 		deleteFromDB(regId);
 	}
 
-	public static void fetchRegistrations() {
-		search(RegistrationID.class);
+	public static void fetchRegistrations(OnCompletion onCompletion) {
+		search(RegistrationID.class, onCompletion);
 	}
 
 	public static void insert(Account account) {
 		insert2DB(account);
 	}
 
-	public static void fetchAccounts() {
-		search(Account.class);
+	public static void fetchAccounts(OnCompletion onCompletion) {
+		search(Account.class, onCompletion);
 	}
 
 	public static void insert(Event event) {
 		insert2DB(event);
 	}
 
-	public static void fetchEvents() {
-		search(Event.class);
+	public static void fetchEvents(OnCompletion onCompletion) {
+		search(Event.class, onCompletion);
 	}
-	
+
 	public static void insert(Charge charge) {
 		insert2DB(charge);
 	}
-	
-	public static void fetchCharges() {
-		search(Charge.class);
+
+	public static void fetchCharges(OnCompletion onCompletion) {
+		search(Charge.class, onCompletion);
+	}
+
+	public static void fetchTransactions(OnCompletion onCompletion) {
+		search(Transaction.class, onCompletion);
 	}
 
 	private static void insert2DB(final IBMDataObject entity) {
@@ -71,7 +75,7 @@ public class Operations {
 		});
 	}
 
-	private static void search(Class entityClass) {
+	private static void search(Class entityClass, final OnCompletion onCompletion) {
 		try {
 			IBMQuery<IBMDataObject> query = IBMQuery.queryForClass(entityClass);
 			// Query all the registration ids from the server
@@ -91,12 +95,7 @@ public class Operations {
 								Log.e(TAG, "Exception : "
 										+ task.getError().getMessage());
 							} else {
-								// If the result succeeds, log the entities.
-								for (IBMDataObject entity : objects) {
-									Log.d(TAG,
-											"Fetched entity "
-													+ entity.toString());
-								}
+								onCompletion.onComplete(objects);								
 							}
 							return null;
 						}

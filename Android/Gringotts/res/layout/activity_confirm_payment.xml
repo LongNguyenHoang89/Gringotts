@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="fi.aalto.gringotts.ConfirmPaymentActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/recipient_text"
+            style="@style/CommonTextSmallBlack"
+            android:layout_marginTop="5dp"
+            android:text="Recipient: Long Nguyen" />
+
+        <TextView
+            android:id="@+id/facebook_text"
+            style="@style/CommonTextSmallBlack"
+            android:layout_marginTop="5dp"
+            android:text="Facebook: Eledra Nguyen" />
+
+        <TextView
+            android:id="@+id/amount_text"
+            style="@style/CommonTextSmallBlack"
+            android:layout_marginTop="5dp"
+            android:text="Amount: €10" />
+
+        <TextView
+            android:id="@+id/message_text"
+            style="@style/CommonTextSmallBlack"
+            android:layout_marginTop="5dp"
+            android:text="Reason: Pay for lastweek party" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/security_code_box"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edit_text"
+            android:hint="Security code"
+            android:inputType="numberDecimal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp" />
+
+        <Button
+            android:id="@+id/confirm_payment_btn"
+            style="@style/ButtonTheme"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="15dp"
+            android:text="Confirm" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Confirm using fingerprint"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@drawable/fingerprint_box"
+            android:padding="40dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/fingerprint" />
+    </LinearLayout>
+
+</LinearLayout>

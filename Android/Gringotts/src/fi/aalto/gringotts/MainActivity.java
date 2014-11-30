@@ -66,6 +66,7 @@ public class MainActivity extends CommonActivity {
 		boolean logedIn = i.getBooleanExtra("logedIn", false);
 		if (!logedIn) {
 			i = new Intent(this, LoginFacebookActivity.class);
+
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(i);
 			finish();
@@ -78,7 +79,6 @@ public class MainActivity extends CommonActivity {
 			// init push services
 			initPushService();
 		}
-
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class MainActivity extends CommonActivity {
 		PayButton.setOnClickListener(buttonClick);
 		ChargeButton.setOnClickListener(buttonClick);
 
-		NotificationManager.getInstance().Init(PreferenceManager.getDefaultSharedPreferences(this), this);		
+		NotificationManager.getInstance().Init(PreferenceManager.getDefaultSharedPreferences(this), this);
 	}
 
 	/**
@@ -167,7 +167,7 @@ public class MainActivity extends CommonActivity {
 		}
 	};
 
-	private void fakeData() {		
+	private void fakeData() {
 		mDataSource.add(new CommonItem("You paid Thanh for meal", new Date(), -100, NotificationType.PAYMENT));
 		mDataSource.add(new CommonItem("Thanh paid you for being awesome", new Date(), 200, NotificationType.PAYMENT));
 		mDataSource.add(new CommonItem("valar morghulis", new Date(), -500, NotificationType.PAYMENT));

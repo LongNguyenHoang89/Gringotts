@@ -43,17 +43,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="5dp"
+                        android:textSize="18sp"
                         android:text="Nguyen Hoang Long" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
                         android:text="FI87 9999 999 999" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Balance: 10000000" />
+                        android:text="Balance: €10000000" />
                 </LinearLayout>
             </TableRow>
 

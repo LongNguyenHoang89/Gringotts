@@ -1,35 +1,28 @@
 package fi.aalto.gringotts;
 
-import fi.aalto.gringotts.fragments.LoginFacebookFragment;
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-public class LoginFacebookActivity extends FragmentActivity {
+public class OtherBankInfoActivity extends CommonActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login_facebook);
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new LoginFacebookFragment()).commit();
-		}
+		setContentView(R.layout.activity_other_bank_info);
+		setTitle("Your Account");
+		homeButton.setVisibility(View.GONE);
+		notificationButton.setVisibility(View.GONE);
+		notificationNumberView.setVisibility(View.GONE);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.login_facebook, menu);
+		getMenuInflater().inflate(R.menu.other_bank_info, menu);
 		return true;
-	}
-	
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
