@@ -5,6 +5,7 @@ import java.util.Date;
 
 import fi.aalto.gringotts.adapters.CommonListAdapter;
 import fi.aalto.gringotts.entities.CommonItem;
+import fi.aalto.gringotts.entities.Notification;
 import fi.aalto.gringotts.entities.NotificationType;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -29,9 +30,14 @@ public class NotificationActivity extends CommonActivity {
 		mDataSource = new ArrayList<CommonItem>();
 		mAdapter = new CommonListAdapter(this, mDataSource);
 		mNotificationList = (ListView) findViewById(R.id.listView2);
-
 		mNotificationList.setAdapter(mAdapter);
-		fakeData();
+
+		ArrayList<Notification> notification = NotificationManager.getInstance().getNotificationList();
+		for (int i = notification.size() - 1; i >= 0; i--) {
+			mDataSource.add(notification.get(i).ToCommonItem());
+		}
+		mAdapter.notifyDataSetChanged();
+		// fakeData();
 	}
 
 	private void fakeData() {

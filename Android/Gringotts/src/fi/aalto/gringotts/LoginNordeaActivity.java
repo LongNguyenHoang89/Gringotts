@@ -8,35 +8,42 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-;public class LoginNordeaActivity extends Activity {
-	
+import android.widget.EditText;
+
+;
+public class LoginNordeaActivity extends Activity {
+
 	private Activity mActivity;
+	private EditText usernameTxt;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_nordea);
-		
+
 		mActivity = this;
-		
+
 		Button loginNordeaBtn = (Button) findViewById(R.id.login_nordea_btn);
 		loginNordeaBtn.setOnClickListener(loginNordeaListener);
-		
+
 		Button noNordeaBtn = (Button) findViewById(R.id.no_nordea_btn);
+
+		usernameTxt = (EditText) findViewById(R.id.username_box);
 		noNordeaBtn.setOnClickListener(noNordeaListener);
 	}
-	
+
 	View.OnClickListener loginNordeaListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
 			Intent i = new Intent(mActivity, MainActivity.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			i.putExtra("loggedIn", true);
+			//i.putExtra("Id", usernameTxt.getText().toString());
 			startActivity(i);
 			mActivity.finish();
 		}
 	};
-	
+
 	View.OnClickListener noNordeaListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {

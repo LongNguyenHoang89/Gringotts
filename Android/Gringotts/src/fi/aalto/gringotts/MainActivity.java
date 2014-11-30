@@ -15,9 +15,12 @@ import com.ibm.mobile.services.push.IBMPush;
 import com.ibm.mobile.services.push.IBMPushNotificationListener;
 import com.ibm.mobile.services.push.IBMSimplePushNotification;
 
+import fi.aalto.displayingbitmaps.util.ImageFetcher;
 import fi.aalto.gringotts.adapters.CommonListAdapter;
 import fi.aalto.gringotts.entities.CommonItem;
 import fi.aalto.gringotts.entities.NotificationType;
+import fi.aalto.gringotts.entities.User;
+import fi.aalto.gringotts.entities.UserList;
 import fi.aalto.gringotts.utils.UIHelper;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +30,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,7 +38,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends CommonActivity {
 
@@ -73,9 +79,11 @@ public class MainActivity extends CommonActivity {
 			startActivity(i);
 			finish();
 		} else {
-			initUi();
+			//String id = i.getStringExtra("Id");
+			UserList.getInstance().Init("1");
 			setTitle("Popcoin");
 			hideActionBarIcon();
+			initUi();
 			fakeData();
 
 			// init push services
@@ -129,6 +137,13 @@ public class MainActivity extends CommonActivity {
 		PayButton = (Button) findViewById(R.id.imageButton1);
 		ChargeButton = (Button) findViewById(R.id.imageButton2);
 		EventButton = (Button) findViewById(R.id.imageButton3);
+
+		ImageView avatar = (ImageView) findViewById(R.id.imageView1);
+		//ImageFetcher mImageFetcher = ImageFetcher.createImageFetcher((FragmentActivity) this, 300);
+		//mImageFetcher.loadImage(UserList.getInstance().currentUser.Image, avatar);
+		
+		//TextView userName = (TextView) findViewById(R.id.userName);
+		//userName.setText(UserList.getInstance().currentUser.Name);
 
 		mRecentTransactionList.setAdapter(mAdapter);
 
@@ -215,7 +230,7 @@ public class MainActivity extends CommonActivity {
 		notificationListener = new IBMPushNotificationListener() {
 			@Override
 			public void onReceive(final IBMSimplePushNotification message) {
-				NotificationManager.getInstance().AddNewNotification(message.getPayload());
+				NotificationManager.getInstance().AddNewNotification(message.getAlert());
 				Log.i(CLASS_NAME, message.toString());
 			}
 		};

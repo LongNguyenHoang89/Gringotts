@@ -105,6 +105,10 @@ public class NotificationManager {
 		}
 	}
 
+	public ArrayList<Notification> getNotificationList() {
+		return notificationList;
+	}
+
 	/**
 	 * use this to parse to GSON
 	 * 

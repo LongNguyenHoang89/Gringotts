@@ -60,11 +60,25 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:ellipsize="end"
-        android:gravity="right|center_vertical"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
+        android:gravity="right|center_vertical"        
+        android:layout_marginRight="10dp"
         android:singleLine="true"
         android:textIsSelectable="false"
         android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/paymentButton"
+        style="@style/ButtonTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingLeft="4dp"
+        android:layout_margin="10dp"
+        android:paddingRight="4dp"
+        android:text="Pay"
+        android:visibility="gone" />
 
 </RelativeLayout>
