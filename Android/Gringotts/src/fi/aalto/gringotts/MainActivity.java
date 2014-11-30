@@ -66,10 +66,13 @@ public class MainActivity extends CommonActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		Intent i = getIntent();
 		boolean loggedIn = isLoggedInFacebook();
-		Log.d("TAGGGG", "" + loggedIn);
 		if (!loggedIn) {
-			Intent i = new Intent(this, LoginFacebookActivity.class);
+			loggedIn = i.getBooleanExtra("loggedIn", false);
+		}
+		if (!loggedIn) {
+			i = new Intent(this, LoginFacebookActivity.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(i);
 			finish();

@@ -107,7 +107,6 @@ public class LoginFacebookFragment extends Fragment {
 	    	
 	    	if (!this.getActivity().isFinishing()) {
 		    	Intent i = new Intent(getActivity(), LoginNordeaActivity.class);
-	//	    	i.putExtra("logedIn", true);
 		    	i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		    	getActivity().startActivity(i);
 		    	getActivity().finish();

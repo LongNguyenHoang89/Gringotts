@@ -31,6 +31,7 @@ import android.widget.Button;
 		public void onClick(View v) {
 			Intent i = new Intent(mActivity, MainActivity.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			i.putExtra("loggedIn", true);
 			startActivity(i);
 			mActivity.finish();
 		}
