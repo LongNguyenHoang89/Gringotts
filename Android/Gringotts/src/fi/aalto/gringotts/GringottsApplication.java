@@ -49,7 +49,7 @@ public class GringottsApplication extends Application {
 	private void initializeBluemixApp() {
 		// Read from properties file, where bluemix application details are
 		// stored
-		Properties props = new java.util.Properties();
+		Properties props = new java.util.Properties(); 
 		Context context = getApplicationContext();
 		try {
 			AssetManager assetManager = context.getAssets();
