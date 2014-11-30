@@ -1,5 +1,7 @@
 package fi.aalto.gringotts;
 
+import com.facebook.Session;
+
 import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +26,7 @@ public class CommonActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		populateActionbar();
 		backButton = ((ImageButton) findViewById(R.id.back_button));
 		backButton.setOnClickListener(backClick);
@@ -34,11 +37,17 @@ public class CommonActivity extends FragmentActivity {
 		mActivity = this;
 	}
 
+	protected boolean isLoggedInFacebook() {
+		Session session = Session.getActiveSession();
+		return (session != null && session.isOpened());
+	}
+
 	OnClickListener backClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
 			onBackPressed();
-			overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
+			overridePendingTransition(R.drawable.pull_in_left,
+					R.drawable.push_out_right);
 		}
 	};
 
@@ -56,7 +65,8 @@ public class CommonActivity extends FragmentActivity {
 		public void onClick(View v) {
 			Intent i = new Intent(CommonActivity.this, MainActivity.class);
 			startActivity(i);
-			overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
+			overridePendingTransition(R.drawable.pull_in_left,
+					R.drawable.push_out_right);
 		}
 	};
 
@@ -72,6 +82,10 @@ public class CommonActivity extends FragmentActivity {
 		homeButton.setVisibility(View.GONE);
 	}
 
+	protected void hideActionBar() {
+		getActionBar().hide();
+	}
+
 	protected void setTitle(String text) {
 		TextView label = (TextView) findViewById(R.id.screen_title);
 		label.setText(text);
@@ -80,12 +94,14 @@ public class CommonActivity extends FragmentActivity {
 	@Override
 	public void startActivity(Intent intent) {
 		super.startActivity(intent);
-		overridePendingTransition(R.drawable.pull_in_right, R.drawable.push_out_left);
+		overridePendingTransition(R.drawable.pull_in_right,
+				R.drawable.push_out_left);
 	}
 
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
+		overridePendingTransition(R.drawable.pull_in_left,
+				R.drawable.push_out_right);
 	}
 }

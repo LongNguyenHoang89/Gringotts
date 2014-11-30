@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="fi.aalto.gringotts.LoginNordeaActivity" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:layout_margin="15dp"
+        android:src="@drawable/nordea_logo" />
+
+    <EditText
+        android:id="@+id/username_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:hint="Enter user ID"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp" 
+        android:background="@drawable/nordea_login_box"/>
+
+    <EditText
+        android:id="@+id/password_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:hint="Enter password"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp" 
+        android:background="@drawable/nordea_login_box"/>
+
+    <Button
+        android:id="@+id/login_nordea_btn"
+        style="@style/ButtonTheme"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp" 
+        android:text="Login"/>
+    
+    <Button
+        android:id="@+id/no_nordea_btn"
+        style="@style/ButtonTheme"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="25dp" 
+        android:text="I am not using Nordea"/>
+
+</LinearLayout>

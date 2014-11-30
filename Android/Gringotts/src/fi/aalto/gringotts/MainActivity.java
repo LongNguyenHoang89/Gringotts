@@ -65,10 +65,10 @@ public class MainActivity extends CommonActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		Intent i = this.getIntent();
-		boolean logedIn = i.getBooleanExtra("logedIn", false);
-		if (!logedIn) {
-			i = new Intent(this, LoginFacebookActivity.class);
+		boolean loggedIn = isLoggedInFacebook();
+		Log.d("TAGGGG", "" + loggedIn);
+		if (!loggedIn) {
+			Intent i = new Intent(this, LoginFacebookActivity.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(i);
 			finish();
@@ -81,8 +81,8 @@ public class MainActivity extends CommonActivity {
 			// init push services
 			initPushService();
 		}
-
 	}
+	
 
 	@Override
     protected void onResume() {
