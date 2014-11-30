@@ -11,6 +11,7 @@ import android.app.ActionBar;
 //import android.app.Fragment;
 //import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 //import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,8 +24,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 public class ChargeActivity extends CommonActivity  implements
@@ -163,6 +166,14 @@ public class ChargeActivity extends CommonActivity  implements
 		public PlaceholderFragment() {
 		}
 
+
+		@Override
+		public boolean onTouchEvent(MotionEvent event) {
+			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+			return true;
+		}
+		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {

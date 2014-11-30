@@ -9,6 +9,7 @@ import java.util.Properties;
 import bolts.Continuation;
 import bolts.Task;
 
+import com.facebook.AppEventsLogger;
 import com.ibm.mobile.services.core.IBMBluemix;
 import com.ibm.mobile.services.push.IBMPush;
 import com.ibm.mobile.services.push.IBMPushNotificationListener;
@@ -64,19 +65,42 @@ public class MainActivity extends CommonActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		initUi();
-		setTitle("Popcoin");
-		hideActionBarIcon();
-		fakeData();
+		
+		Intent i = this.getIntent();
+		boolean logedIn = i.getBooleanExtra("logedIn", false);
+		if (!logedIn) {
+			i = new Intent(this, LoginFacebookActivity.class);
+			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(i);
+			finish();
+		} else {
+			initUi();
+			setTitle("Popcoin");
+			hideActionBarIcon();
+			fakeData();
+			
+			// init push services
+			initPushService();
+		}
 
-		// init push services
-		initPushService();
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		registerPushListener();
+    protected void onResume() {
+        super.onResume();
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+        
+        // register PUSH
+        registerPushListener();
+    }
+	
+	@Override
+	protected void onPause() {
+	  super.onPause();
+
+	  // Logs 'app deactivate' App Event.
+	  AppEventsLogger.deactivateApp(this);
 	}
 
 	@Override

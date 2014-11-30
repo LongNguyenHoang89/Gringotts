@@ -1,6 +1,7 @@
 package fi.aalto.gringotts;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -8,8 +9,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -20,7 +23,7 @@ public class CommonActivity extends FragmentActivity {
 	ImageButton notificationButton;
 	TextView notificationNumberView;
 	FrameLayout notificationFrame;
-
+	View rootView;
 	protected FragmentActivity mActivity;
 
 	@Override
@@ -37,6 +40,15 @@ public class CommonActivity extends FragmentActivity {
 		notificationFrame = (FrameLayout) findViewById(R.id.notification_frame);
 		notificationFrame.setVisibility(View.GONE);
 		mActivity = this;
+
+		rootView = getWindow().getDecorView().findViewById(android.R.id.content);
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+		return true;
 	}
 
 	OnClickListener backClick = new OnClickListener() {
@@ -77,7 +89,7 @@ public class CommonActivity extends FragmentActivity {
 		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 		getActionBar().setCustomView(R.layout.custom_action_bar);
 		getActionBar().setDisplayShowHomeEnabled(true);
-		getActionBar().setIcon(new ColorDrawable(Color.TRANSPARENT));		
+		getActionBar().setIcon(new ColorDrawable(Color.TRANSPARENT));
 	}
 
 	protected void hideActionBarIcon() {
