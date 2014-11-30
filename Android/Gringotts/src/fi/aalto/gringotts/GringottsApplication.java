@@ -23,6 +23,7 @@ import com.ibm.mobile.services.data.IBMData;
 import fi.aalto.gringotts.mbdata.Account;
 import fi.aalto.gringotts.mbdata.Charge;
 import fi.aalto.gringotts.mbdata.Event;
+import fi.aalto.gringotts.mbdata.Operations;
 import fi.aalto.gringotts.mbdata.PaymentStatus;
 import fi.aalto.gringotts.mbdata.RegistrationID;
 
@@ -70,8 +71,8 @@ public class GringottsApplication extends Application {
 		// register the Registration ID
 		RegistrationID.registerSpecialization(RegistrationID.class);
 
-		Log.d(TAG, "Inserting dummy records");
-		initDB();
+		//Log.d(TAG, "Inserting dummy records");
+		//initDB();
 
 		// Log.d(TAG, "Reading registration ids");
 		// fetchAll();
@@ -195,16 +196,19 @@ public class GringottsApplication extends Application {
 		regId1.setFacebookId("1");
 		regId1.setRegistrationId("547a5e821fde007c80223a02");
 		regId1.setTimestamp();
+		Operations.insert(regId1);
 
 		final RegistrationID regId2 = new RegistrationID();
 		regId2.setFacebookId("2");
 		regId2.setRegistrationId("547a787e1fde007c8022accb");
 		regId2.setTimestamp();
+		Operations.insert(regId2);
 
 		final RegistrationID regId3 = new RegistrationID();
 		regId3.setFacebookId("3");
 		regId3.setRegistrationId("5479d0641fde007c801eeebc");
 		regId3.setTimestamp();
+		Operations.insert(regId3);
 
 		final Account account1 = new Account();
 		account1.setFacebookId(regId1.getFacebookId());
@@ -213,6 +217,7 @@ public class GringottsApplication extends Application {
 		account1.setAddress("ho chi minh city");
 		account1.setRemark("Masters Student, Aalto");
 		account1.setTimestamp();
+		Operations.insert(account1);
 
 		final Account account2 = new Account();
 		account2.setFacebookId(regId2.getFacebookId());
@@ -221,6 +226,7 @@ public class GringottsApplication extends Application {
 		account2.setAddress("Hanoi");
 		account2.setRemark("PhD Student, Aalto");
 		account2.setTimestamp();
+		Operations.insert(account2);
 
 		final Account account3 = new Account();
 		account3.setFacebookId(regId3.getFacebookId());
@@ -229,24 +235,28 @@ public class GringottsApplication extends Application {
 		account3.setAddress("Hanoi");
 		account3.setRemark("Business Student, Aalto");
 		account3.setTimestamp();
+		Operations.insert(account3);
 
 		Event event = new Event();
 		event.setId("65");
 		event.setDetail("Party at Ha's place");
 		event.setOrganizerFBId(regId1.getFacebookId());
 		event.setTimestamp();
+		Operations.insert(event);
 
 		Charge charge1 = new Charge();
 		charge1.setEventId(event.getId());
 		charge1.setPaidByFbId(regId2.getFacebookId());
 		charge1.setStatus(PaymentStatus.OPEN);
 		charge1.setAmount(6.7f);
+		Operations.insert(charge1);
 
 		Charge charge2 = new Charge();
 		charge2.setEventId(event.getId());
 		charge2.setPaidByFbId(regId3.getFacebookId());
 		charge2.setStatus(PaymentStatus.OPEN);
 		charge2.setAmount(7.2f);
+		Operations.insert(charge2);
 	}
 
 	private String uuid() {
