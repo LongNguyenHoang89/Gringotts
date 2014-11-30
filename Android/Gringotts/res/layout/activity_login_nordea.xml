@@ -2,10 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#39ecf7"
+    android:background="@color/btnFill"
     android:orientation="vertical"
     tools:context="fi.aalto.gringotts.LoginNordeaActivity" >
-
     
 
     <ImageView
@@ -62,6 +61,8 @@
         android:layout_marginRight="25dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/nordea_login_btn"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         android:text="Login" />
 
     <Button
@@ -71,6 +72,8 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         android:background="@drawable/nordea_login_btn"
         android:text="I am not using Nordea" />
 
