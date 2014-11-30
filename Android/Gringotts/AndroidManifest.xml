@@ -7,15 +7,18 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
-	 <permission android:name="fi.aalto.gringotts.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-	 <uses-permission android:name="fi.aalto.gringotts.permission.C2D_MESSAGE" />
-	 <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-	 <uses-permission android:name="android.permission.WAKE_LOCK" />
-	 <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-	 <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-	 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    
+
+    <permission
+        android:name="fi.aalto.gringotts.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="fi.aalto.gringotts.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -33,19 +36,23 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/CustomActionBarTheme" >
-        <meta-data android:name="com.google.android.gms.version"
+        <meta-data
+            android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        
+        <activity android:name="com.facebook.LoginActivity" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
-             <intent-filter>
-
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-           
         </activity>
         <activity
             android:name=".EventList"
@@ -54,7 +61,6 @@
         <activity
             android:name=".EventInfo"
             android:label="@string/title_activity_event_info" >
-           
         </activity>
         <activity
             android:name=".NotificationActivity"
@@ -77,8 +83,7 @@
             android:label="@string/title_activity_charge" >
         </activity>
 
-        
-         <!-- Push Settings Start -->
+        <!-- Push Settings Start -->
 
 
         <!-- Add GCM Intent Service and intent-filters for RECEIVE and REGISTRATION of notifications -->
@@ -91,7 +96,7 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
                 <category android:name="fi.aalto.gringotts" />
-            </intent-filter>           
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
 
@@ -113,7 +118,14 @@
             android:label="@string/title_activity_friend_list"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
-
+        <activity
+            android:name=".fragments.LoginFacebookFragment"
+            android:label="@string/title_activity_login_facebook" >
+        </activity>
+        <activity
+            android:name=".LoginFacebookActivity"
+            android:label="@string/title_activity_login_facebook" >
+        </activity>
     </application>
 
 </manifest>
