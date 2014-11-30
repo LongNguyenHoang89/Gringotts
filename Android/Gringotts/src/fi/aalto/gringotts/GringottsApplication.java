@@ -29,6 +29,8 @@ public class GringottsApplication extends Application {
 			.getSimpleName();
 
 	private String sRoute = "10.100.28.219:3000";
+	
+	private final String USER_AGENT = "Mozilla/5.0";
 
 	public GringottsApplication() {
 		// TODO Auto-generated constructor stub
@@ -140,7 +142,7 @@ public class GringottsApplication extends Application {
 					urlConnection.getOutputStream());
 			wr.writeBytes(postData);
 			wr.flush();
-			wr.close();
+			wr.close(); 
 
 			int code = urlConnection.getResponseCode();
 			if (code == 200) {
@@ -182,8 +184,6 @@ public class GringottsApplication extends Application {
 		}
 		return getRequest("http://" + sRoute + "/balance/" + facebookId);
 	}
-
-	private final String USER_AGENT = "Mozilla/5.0";
 
 	public boolean getRequest(String strURL) {
 		HttpURLConnection urlConnection = null;
