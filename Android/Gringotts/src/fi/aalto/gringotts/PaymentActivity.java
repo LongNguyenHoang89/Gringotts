@@ -1,6 +1,7 @@
 package fi.aalto.gringotts;
 
 import fi.aalto.displayingbitmaps.util.ImageFetcher;
+import fi.aalto.gringotts.GringottsApplication.TransactionTask;
 import fi.aalto.gringotts.entities.User;
 import fi.aalto.gringotts.entities.UserList;
 import fi.aalto.gringotts.utils.RoundedImageView;
@@ -89,7 +90,37 @@ public class PaymentActivity extends CommonActivity {
 			GringottsApplication application = (GringottsApplication) this.getActivity().getApplication();
 			float am = Float.valueOf(ammountTxt.getText().toString());
 			String remark = messageTxt.getText().toString();
-			application.transaction(UserList.getInstance().currentUser.Id, targetUser.Id, am, remark);
+
+			TransactionTask task = new TransactionTask(UserList.getInstance().currentUser.Id, targetUser.Id, am, remark, application);
+			task.execute();
+		}
+
+		public class TransactionTask extends AsyncTask<Integer, Integer, Integer> {
+			private final String sSender;
+			private final String sReceiver;
+			private final float sAmount;
+			private final String sRemark;
+			private final GringottsApplication application;
+
+			public TransactionTask(String sender, String receiver, float amount, String remark, GringottsApplication application) {
+				super();
+				this.sSender = sender;
+				this.sReceiver = receiver;
+				this.sAmount = amount;
+				this.sRemark = remark;
+				this.application = application;
+			}
+
+			@Override
+			protected Integer doInBackground(Integer... params) {
+				application.transaction(sSender, sReceiver, sAmount, sRemark);
+				return 0;
+			}
+
+			@Override
+			protected void onPostExecute(Integer result) {
+				super.onPostExecute(result);
+			}
 		}
 
 		private void initUi(View rootView) {
