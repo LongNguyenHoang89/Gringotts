@@ -15,3 +15,4 @@ When you pay or request money from a person, the system will push a notification
 
 The third function is the Event seller. Here, you can find all of the events that you joined on FB. If you are the host of the event, you may collect coins from Event members, in a pop. You have 3 options: REQUEST MONEY, REQUEST DONATION, or SELLING TICKET, depending on the purpose of the event. Basically, request money works similarly to function to Request money from a group, but with a large number of people. On the other hand, the request donation function let people decide the amount they want to donate. This function allow you to make donation, crowd funding, fundraising in just a few steps.
  
+![alt tag](http://url/to/img.png)
