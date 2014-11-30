@@ -77,7 +77,7 @@ public class CommonListAdapter extends ArrayAdapter<CommonItem> {
 			mViewHolder.bottomView.setVisibility(View.GONE);
 		}
 
-		mViewHolder.bottomView.setText(Integer.toString(note.Ammount));
+		mViewHolder.bottomView.setText(Double.toString(note.Ammount));
 
 		return convertView;
 	}

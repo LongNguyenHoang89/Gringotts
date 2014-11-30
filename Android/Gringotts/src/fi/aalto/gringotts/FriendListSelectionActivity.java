@@ -8,6 +8,7 @@ import fi.aalto.gringotts.adapters.CommonListAdapter.ViewHolder;
 import fi.aalto.gringotts.entities.CommonItem;
 import fi.aalto.gringotts.entities.NotificationType;
 import fi.aalto.gringotts.entities.User;
+import fi.aalto.gringotts.entities.UserList;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -60,11 +61,10 @@ public class FriendListSelectionActivity extends FragmentActivity {
 			mContactList.setAdapter(mAdapter);
 			mContactList.setOnItemClickListener(itemClick);
 
-			mDataSource.add(new CommonItem("Long Nguyen", Constants.MOCKPICTURE));
-			mDataSource.add(new CommonItem("Thanh Bui", Constants.MOCKPICTURE));
-			mDataSource.add(new CommonItem("Khoa Trinh", Constants.MOCKPICTURE));
-			mDataSource.add(new CommonItem("Ha Nguyen", Constants.MOCKPICTURE));
-			mDataSource.add(new CommonItem("Swapnil Udar", Constants.MOCKPICTURE));
+			for (int i = 1; i <= UserList.getInstance().mockUser.size(); i++) {
+				mDataSource.add(new CommonItem(UserList.getInstance().getUser(String.valueOf(i))));
+			}
+
 			mAdapter.notifyDataSetChanged();
 		}
 
