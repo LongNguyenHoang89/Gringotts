@@ -2,31 +2,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#39ecf7"
     android:orientation="vertical"
-    android:background="@color/white"
     tools:context="fi.aalto.gringotts.LoginNordeaActivity" >
 
+    
+
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:layout_margin="15dp"
-        android:src="@drawable/nordea_logo" />
+        android:src="@drawable/popcoin_title" />
+    
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_gravity="center_horizontal"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/popcoin_big" />
 
     <EditText
         android:id="@+id/username_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/nordea_login_box"
         android:hint="Enter user ID"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="5dp" 
-        android:background="@drawable/nordea_login_box"/>
+        android:paddingTop="5dp" />
 
     <EditText
         android:id="@+id/password_box"
@@ -35,31 +47,31 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="15dp"
+        android:background="@drawable/nordea_login_box"
         android:hint="Enter password"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="5dp" 
-        android:background="@drawable/nordea_login_box"/>
+        android:paddingTop="5dp" />
 
     <Button
         android:id="@+id/login_nordea_btn"
-        style="@style/ButtonTheme"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="15dp" 
-        android:text="Login"/>
-    
+        android:layout_marginTop="15dp"
+        android:background="@drawable/nordea_login_btn"
+        android:text="Login" />
+
     <Button
         android:id="@+id/no_nordea_btn"
-        style="@style/ButtonTheme"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="25dp" 
-        android:text="I am not using Nordea"/>
+        android:layout_marginTop="25dp"
+        android:background="@drawable/nordea_login_btn"
+        android:text="I am not using Nordea" />
 
 </LinearLayout>

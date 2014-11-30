@@ -87,16 +87,18 @@
 
             <ImageButton
                 android:id="@+id/request_money_btn"
-                android:layout_width="40dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:background="@null"
+                android:scaleType="fitCenter"
                 android:src="@drawable/request" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="Request \r\nmoney"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -110,9 +112,10 @@
 
             <ImageButton
                 android:id="@+id/request_donation_btn"
-                android:layout_width="40dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:background="@null"
                 android:src="@drawable/heart" />
 
@@ -121,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Request\r\ndonation"
+                android:textStyle="bold"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -133,9 +137,10 @@
 
             <ImageButton
                 android:id="@+id/sell_ticket_btn"
-                android:layout_width="40dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:background="@null"
                 android:src="@drawable/ticket" />
 
@@ -144,6 +149,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Sell\r\nticket"
+                android:textStyle="bold"
                 android:textSize="12sp" />
         </LinearLayout>
     </RelativeLayout>
