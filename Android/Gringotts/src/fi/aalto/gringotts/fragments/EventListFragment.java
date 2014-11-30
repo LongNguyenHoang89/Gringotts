@@ -64,7 +64,7 @@ public class EventListFragment extends Fragment {
 		event.sellingTicket = false;
 		mEventList.add(event);
 		
-		event = new Event("BEST Cantus Party", "http://besthelsinki.fi/wp-content/uploads/2014/11/cantus-660x295.jpg");
+		event = new Event("Cantus Party", "http://besthelsinki.fi/wp-content/uploads/2014/11/cantus-660x295.jpg");
 		event.date = "21 December 2014";
 		event.location = "Helsinki";
 		event.isHost = true;
@@ -75,7 +75,7 @@ public class EventListFragment extends Fragment {
 		mEventList.add(event);
 		
 		if (mType == TYPE_ALL) {
-			event = new Event("IBM Future Insight", "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1507923_10152503479981045_6537254921336061611_n.png?oh=bf417715ef9ec2c75f5a8ac9909e8739&oe=55135BD6&__gda__=1426523745_523707cf9a0f2f81f67e4779565be37a");
+			event = new Event("IBM Insight", "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1507923_10152503479981045_6537254921336061611_n.png?oh=bf417715ef9ec2c75f5a8ac9909e8739&oe=55135BD6&__gda__=1426523745_523707cf9a0f2f81f67e4779565be37a");
 			event.date = "25 November 2014";
 			event.location = "Helsinki";
 			event.isHost = false;

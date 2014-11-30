@@ -1,5 +1,6 @@
 package fi.aalto.gringotts.adapters;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 import fi.aalto.displayingbitmaps.util.ImageFetcher;
@@ -55,7 +56,8 @@ public class CommonListAdapter extends ArrayAdapter<CommonItem> {
 		mViewHolder.topView.setText(note.Content);
 
 		if (note.Time != null) {
-			mViewHolder.dateview.setText(note.Time.toString());
+			DateFormat formatDate = DateFormat.getDateTimeInstance();
+			mViewHolder.dateview.setText(formatDate.format(note.Time));
 		} else {
 			mViewHolder.dateview.setVisibility(View.GONE);
 		}
