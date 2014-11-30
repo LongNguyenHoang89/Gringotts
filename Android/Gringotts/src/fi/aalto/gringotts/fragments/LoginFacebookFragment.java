@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class LoginFacebookFragment extends Fragment {
 	
@@ -100,6 +101,9 @@ public class LoginFacebookFragment extends Fragment {
 	private void onSessionStateChange(Session session, SessionState state, Exception exception) {
 	    if (state.isOpened()) {
 	    	Log.i(TAG, "Logged in...");
+	    	int duration = Toast.LENGTH_SHORT;
+	    	Toast toast = Toast.makeText(getActivity(), "Logged in Facebook successfully", duration);
+	    	toast.show();
 	    	
 	    	if (!this.getActivity().isFinishing()) {
 		    	Intent i = new Intent(getActivity(), LoginNordeaActivity.class);
