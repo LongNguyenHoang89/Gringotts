@@ -304,7 +304,7 @@ public class ImageFetcher extends ImageResizer {
                  new ImageCache.ImageCacheParams(context, IMAGE_CACHE_DIR);
     	
     	// Set memory cache to 25% of app memory
-    	cacheParams.setMemCacheSizePercent(0.5f); 
+    	cacheParams.setMemCacheSizePercent(0.7f); 
     	 
     	ImageFetcher fetcher = new ImageFetcher(context, thumbSize);
     	fetcher.setLoadingImage(R.drawable.empty_photo);

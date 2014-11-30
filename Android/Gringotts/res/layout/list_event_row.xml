@@ -26,7 +26,19 @@
 	        android:layout_marginRight="10dp"
 	        android:ellipsize="marquee"
 	        android:singleLine="true"
+	        android:textStyle="bold"
 	        style="@android:style/TextAppearance.Small" />
+        
+        <ImageView
+            android:id="@+id/event_type_icon"
+            android:layout_width="18dp"
+	        android:layout_height="18dp"
+	        android:layout_below="@+id/event_name"
+	        android:layout_alignParentRight="true"
+	        android:adjustViewBounds="true"
+	        android:scaleType="fitXY"
+	        android:layout_marginTop="5dp"
+	        android:layout_marginRight="20dp"/>
     </RelativeLayout>
     
 

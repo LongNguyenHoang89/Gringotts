@@ -47,6 +47,15 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 		ImageView iconView = (ImageView) convertView.findViewById(R.id.event_icon);
 		mImageFetcher.loadImage(mEvents.get(position).url, iconView);
 		
+		ImageView iconTypeView = (ImageView) convertView.findViewById(R.id.event_type_icon);
+		if (mEvents.get(position).isHost) {
+			iconTypeView.setBackgroundResource(R.drawable.host);
+		} else if (mEvents.get(position).ownTicket == null){
+			iconTypeView.setBackgroundResource(R.drawable.exclamation_circle);
+		} else {
+			iconTypeView.setBackgroundResource(R.drawable.check);
+		}
+		
 		 
 		return convertView;
 	}
