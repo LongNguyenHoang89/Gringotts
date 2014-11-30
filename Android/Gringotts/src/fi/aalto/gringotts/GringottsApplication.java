@@ -30,10 +30,10 @@ import fi.aalto.gringotts.mbdata.RegistrationID;
 public class GringottsApplication extends Application {
 	private static final String TAG = GringottsApplication.class
 			.getSimpleName();
-
-	private String sRoute = "10.100.28.219:3000";
-
+	
 	private final String USER_AGENT = "Mozilla/5.0";
+
+	private String sRoute = "10.100.28.219:3000";	
 
 	public GringottsApplication() {
 		// TODO Auto-generated constructor stub
