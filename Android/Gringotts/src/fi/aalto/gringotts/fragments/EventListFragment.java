@@ -68,7 +68,7 @@ public class EventListFragment extends Fragment {
 		event.date = "21 December 2014";
 		event.location = "Helsinki";
 		event.isHost = true;
-		event.sellingTicket = true;
+		event.sellingTicket = false;
 		event.ticketPrice = 5;
 		event.soldTicket = 130;
 		event.totalTicket = 200;
