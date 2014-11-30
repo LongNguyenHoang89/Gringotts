@@ -14,14 +14,16 @@ import java.util.UUID;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ibm.mobile.services.core.IBMBluemix;
 import com.ibm.mobile.services.data.IBMData;
 
 import fi.aalto.gringotts.mbdata.Account;
-import fi.aalto.gringotts.mbdata.OnCompletion;
-import fi.aalto.gringotts.mbdata.Operations;
+import fi.aalto.gringotts.mbdata.Charge;
+import fi.aalto.gringotts.mbdata.Event;
+import fi.aalto.gringotts.mbdata.PaymentStatus;
 import fi.aalto.gringotts.mbdata.RegistrationID;
 
 public class GringottsApplication extends Application {
@@ -29,7 +31,7 @@ public class GringottsApplication extends Application {
 			.getSimpleName();
 
 	private String sRoute = "10.100.28.219:3000";
-	
+
 	private final String USER_AGENT = "Mozilla/5.0";
 
 	public GringottsApplication() {
@@ -69,45 +71,14 @@ public class GringottsApplication extends Application {
 		RegistrationID.registerSpecialization(RegistrationID.class);
 
 		Log.d(TAG, "Inserting dummy records");
-		// initDB();
+		initDB();
 
-		Log.d(TAG, "Reading registration ids");
+		// Log.d(TAG, "Reading registration ids");
 		// fetchAll();
 
 		// Initialize route
 		// sRoute = props.getProperty(Constants.APP_ROUTE);
 		Log.d(TAG, "Route " + sRoute);
-
-		//JUST FOR TESTING******************************
-		new Thread(new Runnable() {
-			public void run() {
-				if (transaction("FB_43e26d43-9d01-42bb-ac11-09496a10ed8f",
-						"FB_cb74f793-e05a-4864-bd40-3e75fcf202e2", 4.5f,
-						"From an android app"))
-					Log.d(TAG, "Transaction successfull");
-				else
-					Log.d(TAG, "Transaction unsuccessfull");
-			}
-		}).start();
-
-		new Thread(new Runnable() {
-			public void run() {
-				if (charge())
-					Log.d(TAG, "Charge successfull");
-				else
-					Log.e(TAG, "Charge unsuccessfull");
-			}
-		}).start();
-
-		new Thread(new Runnable() {
-			public void run() {
-				if (charge("EVENT_7ac87b8e-ecbe-4bf7-b98e-c4f7d118d8cf"))
-					Log.d(TAG, "Charge with event id successfull");
-				else
-					Log.e(TAG, "Charge with event id unsuccessfull");
-			}
-		}).start();
-		//JUST FOR TESTING****************** ************
 	}
 
 	private String encode(String str) {
@@ -142,7 +113,7 @@ public class GringottsApplication extends Application {
 					urlConnection.getOutputStream());
 			wr.writeBytes(postData);
 			wr.flush();
-			wr.close(); 
+			wr.close();
 
 			int code = urlConnection.getResponseCode();
 			if (code == 200) {
@@ -220,73 +191,92 @@ public class GringottsApplication extends Application {
 	}
 
 	private void initDB() {
-		/*
-		 * final RegistrationID regId1 = new RegistrationID();
-		 * regId1.setFacebookId("FB_" + uuid());
-		 * regId1.setRegistrationId("REG_ID_" + uuid()); regId1.setTimestamp();
-		 * Operations.insert(regId1);
-		 * 
-		 * final RegistrationID regId2 = new RegistrationID();
-		 * regId2.setFacebookId("FB_" + uuid());
-		 * regId2.setRegistrationId("REG_ID_" + uuid()); regId2.setTimestamp();
-		 * Operations.insert(regId2);
-		 * 
-		 * final RegistrationID regId3 = new RegistrationID();
-		 * regId3.setFacebookId("FB_" + uuid());
-		 * regId3.setRegistrationId("REG_ID_" + uuid()); regId3.setTimestamp();
-		 * Operations.insert(regId3);
-		 * 
-		 * Event event = new Event(); event.setId("EVENT_" + uuid());
-		 * event.setDetail("Event details");
-		 * event.setOrganizerFBId(regId1.getFacebookId()); event.setTimestamp();
-		 * Operations.insert(event);
-		 * 
-		 * Charge charge1 = new Charge(); charge1.setEventId(event.getId());
-		 * charge1.setAmount(78.78f);
-		 * charge1.setPaidByFbId(regId2.getFacebookId());
-		 * charge1.setStatus(PaymentStatus.OPEN); Operations.insert(charge1);
-		 * 
-		 * Charge charge2 = new Charge(); charge2.setEventId(event.getId());
-		 * charge2.setAmount(99.78f);
-		 * charge2.setPaidByFbId(regId3.getFacebookId());
-		 * charge2.setStatus(PaymentStatus.OPEN); Operations.insert(charge2);
-		 */
+		final RegistrationID regId1 = new RegistrationID();
+		regId1.setFacebookId("1");
+		regId1.setRegistrationId("547a5e821fde007c80223a02");
+		regId1.setTimestamp();
 
-		Account account1 = new Account();
-		account1.setFacebookId("FB_cb74f793-e05a-4864-bd40-3e75fcf202e2");
+		final RegistrationID regId2 = new RegistrationID();
+		regId2.setFacebookId("2");
+		regId2.setRegistrationId("547a787e1fde007c8022accb");
+		regId2.setTimestamp();
+
+		final RegistrationID regId3 = new RegistrationID();
+		regId3.setFacebookId("3");
+		regId3.setRegistrationId("5479d0641fde007c801eeebc");
+		regId3.setTimestamp();
+
+		final Account account1 = new Account();
+		account1.setFacebookId(regId1.getFacebookId());
 		account1.setIBAN("13");
-		account1.setName("Name 1");
-		account1.setRemark("Remark 1");
+		account1.setName("Thanh");
+		account1.setAddress("ho chi minh city");
+		account1.setRemark("Masters Student, Aalto");
 		account1.setTimestamp();
-		account1.setAddress("Address 1");
-		Operations.insert(account1);
 
-		Account account2 = new Account();
-		account2.setFacebookId("FB_43e26d43-9d01-42bb-ac11-09496a10ed8f");
+		final Account account2 = new Account();
+		account2.setFacebookId(regId2.getFacebookId());
 		account2.setIBAN("21");
-		account2.setName("Name 2");
-		account2.setRemark("Remark 2");
+		account2.setName("Long");
+		account2.setAddress("Hanoi");
+		account2.setRemark("PhD Student, Aalto");
 		account2.setTimestamp();
-		account2.setAddress("Address 2");
-		Operations.insert(account2);
 
-		/*
-		 * Account account3 = new Account();
-		 * account3.setFacebookId(regId3.getFacebookId());
-		 * account3.setIBAN("IBAN_" + uuid()); account3.setName("Name 3");
-		 * account3.setRemark("Remark 3"); account3.setTimestamp();
-		 * account3.setAddress("Address 3"); Operations.insert(account3);
-		 */
-	}
+		final Account account3 = new Account();
+		account3.setFacebookId(regId3.getFacebookId());
+		account3.setIBAN("17");
+		account3.setName("Ha");
+		account3.setAddress("Hanoi");
+		account3.setRemark("Business Student, Aalto");
+		account3.setTimestamp();
 
-	private void fetchAll() {
-		Operations.fetchRegistrations(new OnCompletion());
-		// Operations.fetchAccounts();
-		Operations.fetchEvents(new OnCompletion());
-		Operations.fetchCharges(new OnCompletion());
+		Event event = new Event();
+		event.setId("65");
+		event.setDetail("Party at Ha's place");
+		event.setOrganizerFBId(regId1.getFacebookId());
+		event.setTimestamp();
+
+		Charge charge1 = new Charge();
+		charge1.setEventId(event.getId());
+		charge1.setPaidByFbId(regId2.getFacebookId());
+		charge1.setStatus(PaymentStatus.OPEN);
+		charge1.setAmount(6.7f);
+
+		Charge charge2 = new Charge();
+		charge2.setEventId(event.getId());
+		charge2.setPaidByFbId(regId3.getFacebookId());
+		charge2.setStatus(PaymentStatus.OPEN);
+		charge2.setAmount(7.2f);
 	}
 
 	private String uuid() {
 		return UUID.randomUUID().toString();
+	}
+
+	public class TransactionTask extends AsyncTask<Integer, Integer, Integer> {
+		private final String sSender;
+		private final String sReceiver;
+		private final float sAmount;
+		private final String sRemark;
+
+		public TransactionTask(String sender, String receiver, float amount,
+				String remark) {
+			super();
+			this.sSender = sender;
+			this.sReceiver = receiver;
+			this.sAmount = amount;
+			this.sRemark = remark;
+		}
+
+		@Override
+		protected Integer doInBackground(Integer... params) {
+			transaction(sSender, sReceiver, sAmount, sRemark);
+			return 0;
+		}
+
+		@Override
+		protected void onPostExecute(Integer result) {
+			super.onPostExecute(result);
+		}
 	}
 }
