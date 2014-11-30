@@ -157,7 +157,7 @@ public class GringottsApplication extends Application {
 		return getRequest("http://" + sRoute + "/balance/" + facebookId);
 	}
 
-	public boolean getRequest(String strURL) {
+	public boolean getRequest(String strURL) { 
 		HttpURLConnection urlConnection = null;
 		URL url;
 		try {
