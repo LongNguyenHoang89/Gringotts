@@ -99,11 +99,14 @@ public class LoginFacebookFragment extends Fragment {
 	private void onSessionStateChange(Session session, SessionState state, Exception exception) {
 	    if (state.isOpened()) {
 	    	Log.i(TAG, "Logged in...");
-	    	Intent i = new Intent(getActivity(), MainActivity.class);
-//	    	i.putExtra("logedIn", true);
-//	    	i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	    	getActivity().startActivity(i);
-	    	getActivity().finish();
+	    	
+	    	if (!this.getActivity().isFinishing()) {
+		    	Intent i = new Intent(getActivity(), MainActivity.class);
+	//	    	i.putExtra("logedIn", true);
+	//	    	i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		    	getActivity().startActivity(i);
+		    	getActivity().finish();
+	    	}
 	        
 	    } else if (state.isClosed()) {
 	        Log.i(TAG, "Logged out...");
