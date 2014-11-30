@@ -24,5 +24,6 @@
     <string name="facebook_app_id">379824268849833</string>
     <string name="title_activity_login_nordea">LoginNordeaActivity</string>
     <string name="title_activity_other_bank_info">OtherBankInfoActivity</string>
+    <string name="title_activity_confirm_payment">ConfirmPaymentActivity</string>
 
 </resources>
