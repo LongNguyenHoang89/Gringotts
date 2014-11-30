@@ -60,7 +60,9 @@
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp" >
+                android:paddingTop="25dp"
+                android:paddingBottom="25dp"
+                 >
 
                 <Button
                     android:id="@+id/imageButton1"
@@ -85,8 +87,8 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:drawableTop="@drawable/events"
-                    android:textColor="@color/yellow"
+                    android:drawableTop="@drawable/calendar"
+                    android:textColor="@color/darkblue"
                     android:text="Events" />
             </TableRow>
         </TableLayout>
