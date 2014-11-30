@@ -18,7 +18,8 @@ public class UserList {
 	}
 
 	public ArrayList<User> mockUser;
-
+	public User currentUser;
+	
 	public UserList() {
 		mockUser = new ArrayList<User>();
 		mockUser.add(new User("1", "Long Nguyen", Constants.MOCKPICTURE));
@@ -26,8 +27,10 @@ public class UserList {
 		mockUser.add(new User("3", "Khoa Trinh", Constants.MOCKPICTURE3));
 		mockUser.add(new User("4", "Ha Nguyen", Constants.MOCKPICTURE4));
 		mockUser.add(new User("5", "Swapnil Udar", Constants.MOCKPICTURE2));
-	}
-
+		
+		currentUser = getUser("1");
+	}		
+	
 	/**
 	 * get mock user base on their id
 	 * @param id

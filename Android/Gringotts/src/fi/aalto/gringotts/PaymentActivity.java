@@ -2,12 +2,16 @@ package fi.aalto.gringotts;
 
 import fi.aalto.displayingbitmaps.util.ImageFetcher;
 import fi.aalto.gringotts.entities.User;
+import fi.aalto.gringotts.entities.UserList;
 import fi.aalto.gringotts.utils.RoundedImageView;
+import fi.aalto.gringotts.utils.SlideButton;
+import fi.aalto.gringotts.utils.SlideButtonListener;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -19,6 +23,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.os.Build;
 import android.provider.Settings.Global;
@@ -65,6 +70,9 @@ public class PaymentActivity extends CommonActivity {
 		private RoundedImageView targetImage;
 		private Button plusButton;
 		private TextView targetName;
+		private EditText ammountTxt;
+		private EditText messageTxt;
+		private SlideButton paymentButton;
 
 		public PlaceholderFragment() {
 		}
@@ -77,14 +85,30 @@ public class PaymentActivity extends CommonActivity {
 			return rootView;
 		}
 
+		private void makeTransfer() {
+			GringottsApplication application = (GringottsApplication) this.getActivity().getApplication();
+			float am = Float.valueOf(ammountTxt.getText().toString());
+			String remark = messageTxt.getText().toString();
+			application.transaction(UserList.getInstance().currentUser.Id, targetUser.Id, am, remark);
+		}
+
 		private void initUi(View rootView) {
 			userImage = (RoundedImageView) rootView.findViewById(R.id.userImage);
 			targetImage = (RoundedImageView) rootView.findViewById(R.id.targetImage);
 			plusButton = (Button) rootView.findViewById(R.id.plus_button);
 			targetName = (TextView) rootView.findViewById(R.id.target_name);
+			ammountTxt = (EditText) rootView.findViewById(R.id.ammountLabel);
+			messageTxt = (EditText) rootView.findViewById(R.id.message_edit_text);
+			paymentButton = (SlideButton) rootView.findViewById(R.id.paymentButton);
 			hideTarget();
 			plusButton.setOnClickListener(addContact);
 			mImageFetcher.loadImage(Constants.MOCKPICTURE, userImage);
+			paymentButton.setSlideButtonListener(new SlideButtonListener() {
+				@Override
+				public void handleSlide() {
+					makeTransfer();
+				}
+			});
 		}
 
 		OnClickListener addContact = new OnClickListener() {
@@ -101,10 +125,13 @@ public class PaymentActivity extends CommonActivity {
 			setTarget(target);
 		}
 
+		private User targetUser;
+
 		public void hideTarget() {
 			plusButton.setVisibility(View.VISIBLE);
 			targetImage.setVisibility(View.GONE);
 			targetName.setVisibility(View.INVISIBLE);
+			targetUser = null;
 		}
 
 		public void setTarget(User user) {
@@ -114,6 +141,7 @@ public class PaymentActivity extends CommonActivity {
 			mImageFetcher.loadImage(user.Image, targetImage);
 			targetName.setText(user.Name);
 			targetImage.setOnTouchListener(dragOut);
+			targetUser = user;
 		}
 
 		OnTouchListener dragOut = new OnTouchListener() {
