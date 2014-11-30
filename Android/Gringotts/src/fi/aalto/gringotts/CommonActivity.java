@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class CommonActivity extends FragmentActivity {
 	ImageButton homeButton;
 	ImageButton notificationButton;
 	TextView notificationNumberView;
+	FrameLayout notificationFrame;
 
 	protected FragmentActivity mActivity;
 
@@ -30,7 +32,10 @@ public class CommonActivity extends FragmentActivity {
 		homeButton = ((ImageButton) findViewById(R.id.home_button));
 		homeButton.setOnClickListener(homeClick);
 		notificationButton = ((ImageButton) findViewById(R.id.notification_button));
+		notificationButton.setOnClickListener(notificationClick);
 		notificationNumberView = (TextView) findViewById(R.id.notification_number);
+		notificationFrame = (FrameLayout) findViewById(R.id.notification_frame);
+		notificationFrame.setVisibility(View.GONE);
 		mActivity = this;
 	}
 
@@ -45,11 +50,19 @@ public class CommonActivity extends FragmentActivity {
 	public void showNotification(int number) {
 		if (number != 0) {
 			notificationNumberView.setVisibility(View.VISIBLE);
-			notificationNumberView.setText(number);
+			notificationNumberView.setText(String.valueOf(number));
 		} else {
 			notificationNumberView.setVisibility(View.INVISIBLE);
 		}
 	}
+
+	OnClickListener notificationClick = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			Intent i = new Intent(CommonActivity.this, NotificationActivity.class);
+			startActivity(i);
+		}
+	};
 
 	OnClickListener homeClick = new OnClickListener() {
 		@Override
@@ -64,12 +77,13 @@ public class CommonActivity extends FragmentActivity {
 		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 		getActionBar().setCustomView(R.layout.custom_action_bar);
 		getActionBar().setDisplayShowHomeEnabled(true);
-		getActionBar().setIcon(new ColorDrawable(Color.TRANSPARENT));
+		getActionBar().setIcon(new ColorDrawable(Color.TRANSPARENT));		
 	}
 
 	protected void hideActionBarIcon() {
 		backButton.setVisibility(View.GONE);
 		homeButton.setVisibility(View.GONE);
+		notificationFrame.setVisibility(View.VISIBLE);
 	}
 
 	protected void setTitle(String text) {

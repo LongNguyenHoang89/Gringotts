@@ -17,6 +17,7 @@ import com.ibm.mobile.services.push.IBMSimplePushNotification;
 import fi.aalto.gringotts.adapters.CommonListAdapter;
 import fi.aalto.gringotts.entities.CommonItem;
 import fi.aalto.gringotts.entities.NotificationType;
+import fi.aalto.gringotts.utils.UIHelper;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -97,16 +98,6 @@ public class MainActivity extends CommonActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	private OnSharedPreferenceChangeListener preferenceChange = new OnSharedPreferenceChangeListener() {
-		@Override
-		public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-			if (key.equals(NOTIFICATION_PREFERENCE)) {
-				notificationNumber = mPrefs.getInt(key, 0);
-				showNotification(notificationNumber);
-			}
-		}
-	};
-
 	private void initUi() {
 		mDataSource = new ArrayList<CommonItem>();
 		mAdapter = new CommonListAdapter(this, mDataSource);
@@ -123,10 +114,9 @@ public class MainActivity extends CommonActivity {
 		// notificationButton.setOnClickListener(buttonClick);
 		PayButton.setOnClickListener(buttonClick);
 		ChargeButton.setOnClickListener(buttonClick);
-		
+
 		mPrefs = getPreferences(MODE_PRIVATE);
 		prefsEditor = mPrefs.edit();
-		mPrefs.registerOnSharedPreferenceChangeListener(preferenceChange);
 		notificationNumber = mPrefs.getInt(NOTIFICATION_PREFERENCE, 0);
 		showNotification(notificationNumber);
 	}
@@ -208,6 +198,12 @@ public class MainActivity extends CommonActivity {
 			public void onReceive(final IBMSimplePushNotification message) {
 				notificationNumber++;
 				MainActivity.prefsEditor.putInt(NOTIFICATION_PREFERENCE, notificationNumber);
+				UIHelper.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						showNotification(notificationNumber);
+					}
+				});
 				Log.i(CLASS_NAME, message.toString());
 			}
 		};
