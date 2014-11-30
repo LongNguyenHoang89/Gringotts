@@ -107,7 +107,7 @@ public class GringottsApplication extends Application {
 					Log.e(TAG, "Charge with event id unsuccessfull");
 			}
 		}).start();
-		//JUST FOR TESTING******************************
+		//JUST FOR TESTING****************** ************
 	}
 
 	private String encode(String str) {
