@@ -26,6 +26,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,19 +54,14 @@ public class MainActivity extends CommonActivity {
 	private static final String APP_SECRET = "applicationSecret";
 	private static final String APP_ROUTE = "applicationRoute";
 	private static final String PROPS_FILE = "bluelist.properties";
+
 	// end defining variables for Push
-
-	private static SharedPreferences mPrefs;
-	private static Editor prefsEditor;
-	private static final String NOTIFICATION_PREFERENCE = "notification";
-
-	private static int notificationNumber;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		Intent i = getIntent();
 		boolean loggedIn = isLoggedInFacebook();
 		if (!loggedIn) {
@@ -81,29 +77,28 @@ public class MainActivity extends CommonActivity {
 			setTitle("Popcoin");
 			hideActionBarIcon();
 			fakeData();
-			
+
 			// init push services
 			initPushService();
 		}
 	}
-	
 
 	@Override
-    protected void onResume() {
-        super.onResume();
-        // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(this);
-        
-        // register PUSH
-        registerPushListener();
-    }
-	
+	protected void onResume() {
+		super.onResume();
+		// Logs 'install' and 'app activate' App Events.
+		AppEventsLogger.activateApp(this);
+
+		// register PUSH
+		registerPushListener();
+	}
+
 	@Override
 	protected void onPause() {
-	  super.onPause();
+		super.onPause();
 
-	  // Logs 'app deactivate' App Event.
-	  AppEventsLogger.deactivateApp(this);
+		// Logs 'app deactivate' App Event.
+		AppEventsLogger.deactivateApp(this);
 	}
 
 	@Override
@@ -142,10 +137,7 @@ public class MainActivity extends CommonActivity {
 		PayButton.setOnClickListener(buttonClick);
 		ChargeButton.setOnClickListener(buttonClick);
 
-		mPrefs = getPreferences(MODE_PRIVATE);
-		prefsEditor = mPrefs.edit();
-		notificationNumber = mPrefs.getInt(NOTIFICATION_PREFERENCE, 0);
-		showNotification(notificationNumber);
+		NotificationManager.getInstance().Init(PreferenceManager.getDefaultSharedPreferences(this), this);
 	}
 
 	/**
@@ -223,14 +215,7 @@ public class MainActivity extends CommonActivity {
 		notificationListener = new IBMPushNotificationListener() {
 			@Override
 			public void onReceive(final IBMSimplePushNotification message) {
-				notificationNumber++;
-				MainActivity.prefsEditor.putInt(NOTIFICATION_PREFERENCE, notificationNumber);
-				UIHelper.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						showNotification(notificationNumber);
-					}
-				});
+				NotificationManager.getInstance().AddNewNotification(message.getPayload());
 				Log.i(CLASS_NAME, message.toString());
 			}
 		};

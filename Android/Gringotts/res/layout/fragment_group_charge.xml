@@ -5,6 +5,12 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="10dp" >
+    
+     <LinearLayout
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
 
     <TableLayout
         android:id="@+id/ticket_info"

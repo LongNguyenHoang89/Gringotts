@@ -31,14 +31,13 @@ public class NotificationActivity extends CommonActivity {
 		mNotificationList = (ListView) findViewById(R.id.listView2);
 
 		mNotificationList.setAdapter(mAdapter);
+		fakeData();
+	}
 
-		mDataSource.add(new CommonItem("You paid Thanh for meal", new Date(),
-				-100, NotificationType.PAYMENT, Constants.MOCKPICTURE));
-		mDataSource.add(new CommonItem("Thanh paid you for being awesome",
-				new Date(), 200, NotificationType.PAYMENT,
-				Constants.MOCKPICTURE));
-		mDataSource.add(new CommonItem("valar morghulis", new Date(), -500,
-				NotificationType.PAYMENT, Constants.MOCKPICTURE));
+	private void fakeData() {
+		mDataSource.add(new CommonItem("You paid Thanh for meal", new Date(), -100, NotificationType.PAYMENT, Constants.MOCKPICTURE));
+		mDataSource.add(new CommonItem("Thanh paid you for being awesome", new Date(), 200, NotificationType.PAYMENT, Constants.MOCKPICTURE));
+		mDataSource.add(new CommonItem("valar morghulis", new Date(), -500, NotificationType.PAYMENT, Constants.MOCKPICTURE));
 		mAdapter.notifyDataSetChanged();
 	}
 

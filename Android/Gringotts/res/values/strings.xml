@@ -20,6 +20,8 @@
     <string name="title_activity_group_charge">GroupChargeActivity</string>
     <string name="title_activity_ticket_sale_acitivity">TicketSaleAcitivity</string>
     <string name="total_revenue_text">Total revenue: €</string>
+    <string name="amount_payment_text">Amount: €</string>
+    <string name="euro_symbol">€</string>
     <string name="title_activity_login_facebook">LoginFacebook</string>
     <string name="facebook_app_id">379824268849833</string>
     <string name="title_activity_login_nordea">LoginNordeaActivity</string>
