@@ -49,9 +49,13 @@ public class CommonActivity extends FragmentActivity {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		hideKeyboard();
+		return true;
+	}
+	
+	protected void hideKeyboard() {
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-		return true;
 	}
 
 	protected boolean isLoggedInFacebook() {
