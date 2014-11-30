@@ -3,6 +3,8 @@ package fi.aalto.gringotts;
 import java.util.Locale;
 
 import fi.aalto.displayingbitmaps.util.ImageFetcher;
+import fi.aalto.gringotts.PaymentActivity.PlaceholderFragment;
+import fi.aalto.gringotts.entities.User;
 import fi.aalto.gringotts.fragments.GroupChargeFragment;
 import fi.aalto.gringotts.utils.RoundedImageView;
 import android.app.ActionBar.Tab;
@@ -12,6 +14,8 @@ import android.app.ActionBar;
 //import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Rect;
 //import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,11 +31,13 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class ChargeActivity extends CommonActivity  implements
-		ActionBar.TabListener {
+public class ChargeActivity extends CommonActivity implements ActionBar.TabListener {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -52,7 +58,7 @@ public class ChargeActivity extends CommonActivity  implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_charge);
 		setTitle("New Charge");
-		
+
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -114,7 +120,7 @@ public class ChargeActivity extends CommonActivity  implements
 			case 1:
 				return new GroupChargeFragment();
 			}
-			
+
 			return null;
 		}
 
@@ -145,7 +151,8 @@ public class ChargeActivity extends CommonActivity  implements
 		private int THUMB_SIZE = 240;
 		private RoundedImageView userImage;
 		private RoundedImageView targetImage;
-
+		private Button plusButton;
+		private TextView targetName;
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
@@ -167,27 +174,76 @@ public class ChargeActivity extends CommonActivity  implements
 		}
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_charge,
-					container, false);
-			mImageFetcher = ImageFetcher.createImageFetcher(
-					(FragmentActivity) this.getActivity(), THUMB_SIZE);
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_charge, container, false);
+			mImageFetcher = ImageFetcher.createImageFetcher((FragmentActivity) this.getActivity(), THUMB_SIZE);
 
 			initUi(rootView);
 			return rootView;
 		}
 
 		private void initUi(View rootView) {
-			userImage = (RoundedImageView) rootView
-					.findViewById(R.id.userImage);
-			targetImage = (RoundedImageView) rootView
-					.findViewById(R.id.targetImage);
+			userImage = (RoundedImageView) rootView.findViewById(R.id.userImage);
+			targetImage = (RoundedImageView) rootView.findViewById(R.id.targetImage);
 
 			mImageFetcher.loadImage(Constants.MOCKPICTURE, userImage);
 			mImageFetcher.loadImage(Constants.MOCKPICTURE, targetImage);
+			
+			plusButton = (Button) rootView.findViewById(R.id.plus_button);
+			targetName = (TextView) rootView.findViewById(R.id.target_name);
+			hideTarget();
+			plusButton.setOnClickListener(addContact);
+			mImageFetcher.loadImage(Constants.MOCKPICTURE, userImage);
 		}
-		
+
+		OnClickListener addContact = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(PlaceholderFragment.this.getActivity(), FriendListSelectionActivity.class);
+				PlaceholderFragment.this.startActivityForResult(i, 0);
+			}
+		};
+
+		@Override
+		public void onActivityResult(int requestCode, int resultCode, Intent data) {
+			User target = (User) data.getSerializableExtra("data");
+			setTarget(target);
+		}
+
+		public void hideTarget() {
+			plusButton.setVisibility(View.VISIBLE);
+			targetImage.setVisibility(View.GONE);
+			targetName.setVisibility(View.INVISIBLE);
+		}
+
+		public void setTarget(User user) {
+			plusButton.setVisibility(View.GONE);
+			targetImage.setVisibility(View.VISIBLE);
+			targetName.setVisibility(View.VISIBLE);
+			mImageFetcher.loadImage(user.Image, targetImage);
+			targetName.setText(user.Name);
+			targetImage.setOnTouchListener(dragOut);
+		}
+
+		OnTouchListener dragOut = new OnTouchListener() {
+			private Rect rect; // Variable rect to hold the bounds of the view
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					// Construct a rect of the view's bounds
+					rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+				}
+
+				if (event.getAction() == MotionEvent.ACTION_MOVE) {
+					if (!rect.contains(v.getLeft() + (int) event.getX(), v.getTop() + (int) event.getY())) {
+						hideTarget();
+					}
+				}
+				return true;
+			}
+		};
+
 		@Override
 		public void onDestroy() {
 			mImageFetcher.clearCache();
@@ -198,8 +254,7 @@ public class ChargeActivity extends CommonActivity  implements
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		overridePendingTransition(R.drawable.pull_in_left,
-				R.drawable.push_out_right);
+		overridePendingTransition(R.drawable.pull_in_left, R.drawable.push_out_right);
 	}
 
 	@Override
@@ -210,7 +265,7 @@ public class ChargeActivity extends CommonActivity  implements
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		mViewPager.setCurrentItem(tab.getPosition());
-	    mViewPager.getAdapter().notifyDataSetChanged(); 
+		mViewPager.getAdapter().notifyDataSetChanged();
 
 	}
 
